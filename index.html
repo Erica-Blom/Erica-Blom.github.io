@@ -1,1 +1,67 @@
-<h1>Hej</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta allow-feedback="all">
+  <title>GenAI chat</title>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      --df-messenger-message-feedback-icon-background: violet;
+      --df-messenger-titlebar-background: purple;
+      --df-messenger-chat-background: #fff;
+      --df-messenger-internal-chat-bubble-size-offset: 50px;
+      --df-messenger-font-family: "Telia Sans";
+      --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    df-messenger-chat-bubble {
+      --df-messenger-chat-bubble-background: #4E0174;
+      --df-messenger-chat-bubble-border-radius: 10px;
+      --df-messenger-chat-window-height: 100%;
+      --df-messenger-chat-window-width: 480px;
+
+    }
+  </style>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+</head>
+
+<body>
+  <df-messenger location="global" project-id="convhub-delivery-dev-cx" agent-id="94cc8700-d7b0-4ae2-8beb-16f971ef84c3" language-code="sv" allow-feedback="all">
+    <df-messenger-chat-bubble chat-title="TeliaGPT" anchor="bottom">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      var trigger = document.querySelector("df-messenger-chat-bubble");
+      var chat = trigger.shadowRoot.querySelector("df-messenger-chat");
+
+      var style = document.createElement('style');
+      var styleChat = document.createElement('style');
+
+      style.textContent = `
+        .bubble{height: 70px !important; width: 200px !important;}
+        .bubble:after{content:'Chatta'; color:#fff}
+        .chat-wrapper.expanded{bottom:0px !important; position:fixed}
+      
+      `;
+
+      styleChat.textContent = `
+        #df-chat-wrapper{position:fixed !important; right:10px}
+      `;
+
+      chat.shadowRoot.appendChild(styleChat);
+      trigger.shadowRoot.appendChild(style);
+    });
+  </script>
+</body>
+
+</html>
