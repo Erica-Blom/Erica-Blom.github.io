@@ -8,60 +8,18 @@
   <meta http-equiv="Expires" content="0" />
   <title>Telia MVP</title>
   <style>
-    df-messenger {
-      z-index: 999;
-      position: fixed;
-      --df-messenger-titlebar-background: #29003E;
-      --df-messenger-chat-background: #fff;
-      --df-messenger-internal-chat-bubble-size-offset: 50px;
-      --df-messenger-font-family: "Telia Sans";
-      --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
-      bottom: 16px;
-      right: 16px;
-    }
+
     df-markdown-message{
       width:304px
     }
-    df-messenger-chat-bubble {
-      --df-messenger-chat-bubble-background: #29003E;
-      --df-messenger-chat-bubble-icon-size:40px;
-      --df-messenger-chat-window-height: calc(100vh - 200px);
-      --df-messenger-chat-window-width:360px;
-      --df-messenger-chat-background: #F5F5FA;
-      --df-messenger-message-bot-background: #F5E0FF;
-      --df-messenger-message-bot-font-color: #222222;
-      --df-messenger-message-bot-font-weight: 400;
-      --df-messenger-message-font-size: 16px;
-      --df-messenger-message-user-background: #fff;
-      --df-messenger-message-user-font-color: #222222;
-      --df-messenger-message-user-font-weight: 400;
-      --df-messenger-message-border-radius: 8px;
-      --df-messenger-send-icon-color: #6D02A3;
-      --df-messenger-input-padding: 0px;
-      --df-messenger-input-font-size: 16px;
-      --df-messenger-message-feedback-icon-font-color: #6D02A3;
-      --df-messenger-citations-font-color: #6D02A3;
-      --df-messenger-citations-border-color: #6D02A3;
-      --df-messenger-citations-border-radius: 50px;
-      --df-messenger-citations-font-size: 16px;
-      --df-messenger-citations-message-font-size: 14px;
-      --df-messenger-input-font-family:'Telia Sans';
-      --df-messenger-input-box-padding:10px 40px 12px 10px;
-      --df-messenger-input-background:#F5F5FA;
-      --df-messenger-input-box-background:#ffffff;
-      --df-messenger-message-user-writing-image-width:250px;
-      --df-messenger-focus-color:#6D02A3;
-      --df-messenger-titlebar-padding:5px 15px;
-      --df-messenger-citations-background:#F5F5FA;
-      --df-messenger-send-icon-offset-y:0px
-    }
+
 
   </style>
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 </head>
 
 <body>
-<df-messenger
+  <df-messenger
   location="europe-west1"
   project-id="telia-se-digitalchannels"
   agent-id="6094ac83-e353-4e6e-917c-afb5c92062bb"
@@ -81,14 +39,23 @@
     var citations = messengerBotUtterance?.shadowRoot?.querySelector("df-citations");
 
     document.addEventListener('DOMContentLoaded', () => {
+      var screenWidth = window.innerWidth;
       var styleUserInput = document.createElement('style');
       var messageListStyle = document.createElement('style');
+      var chatbubbleStyle = document.createElement('style');
       var privacyMessage = document.createElement('div');
       var linkToPage = document.createElement('a');
 
       linkToPage.setAttribute('href', 'https://www.telia.se/')
       linkToPage.setAttribute('target', '_blank')
       linkToPage.innerText = 'Läs mer om detta och hur vi hanterar personuppgifter';
+
+      chatbubbleStyle.textContent = `
+        .bubble{display:none !important}
+      .chat-wrapper{position:static !important}
+      
+
+      `
 
       styleUserInput.textContent = `
         .input-box-wrapper{border:1px solid rgba(0, 0, 0, 0.44);background-color:#fff !important; overflow-y:unset !important; border-radius:3px}
@@ -109,23 +76,129 @@
       var messageList = messageArea.shadowRoot.querySelector('.message-list-wrapper')
       var userInput = chat.shadowRoot.querySelector('df-messenger-user-input')
       var messages = messageList.querySelector('#message-list')
-
-
       privacyMessage.appendChild(linkToPage)
+      console.log(messageList)
       if (messages.firstChild) {
         messages.insertBefore(privacyMessage, messages.firstChild);
       } else {
         messages.appendChild(privacyMessage);
         }
+
+      
       messageArea.shadowRoot.appendChild(messageListStyle)
       userInput.shadowRoot.appendChild(styleUserInput);
       //checkElementsExist();
+      console.log(screenWidth)
+      var style = document.createElement('style');
+      if(screenWidth <= 981){
+        trigger.shadowRoot.querySelector('.bubble').setAttribute('aria-expanded', 'true')
+        trigger.shadowRoot.querySelector('.chat-wrapper').classList.add('expanded')
+       trigger.shadowRoot.appendChild(chatbubbleStyle);
 
+       style.innerHTML = `
+                df-messenger {
+                    z-index: 999;
+                    position: fixed;
+                    --df-messenger-titlebar-background: #29003E;
+                    --df-messenger-chat-background: #fff;
+                    --df-messenger-internal-chat-bubble-size-offset: 0px;
+                    --df-messenger-font-family: "Telia Sans";
+                    --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
+                    bottom: 0px;
+                    right: 0px;
+                }
+
+                df-messenger-chat-bubble {
+                  --df-messenger-chat-bubble-background: #29003E;
+                  --df-messenger-chat-bubble-icon-size:40px;
+                  --df-messenger-chat-window-height: calc(100vh);
+                  --df-messenger-chat-window-width:calc(100vw);
+                  --df-messenger-chat-background: #F5F5FA;
+                  --df-messenger-message-bot-background: #F5E0FF;
+                  --df-messenger-message-bot-font-color: #222222;
+                  --df-messenger-message-bot-font-weight: 400;
+                  --df-messenger-message-font-size: 16px;
+                  --df-messenger-message-user-background: #fff;
+                  --df-messenger-message-user-font-color: #222222;
+                  --df-messenger-message-user-font-weight: 400;
+                  --df-messenger-message-border-radius: 8px;
+                  --df-messenger-send-icon-color: #6D02A3;
+                  --df-messenger-input-padding: 0px;
+                  --df-messenger-input-font-size: 16px;
+                  --df-messenger-message-feedback-icon-font-color: #6D02A3;
+                  --df-messenger-citations-font-color: #6D02A3;
+                  --df-messenger-citations-border-color: #6D02A3;
+                  --df-messenger-citations-border-radius: 50px;
+                  --df-messenger-citations-font-size: 16px;
+                  --df-messenger-citations-message-font-size: 14px;
+                  --df-messenger-input-font-family:'Telia Sans';
+                  --df-messenger-input-box-padding:10px 40px 12px 10px;
+                  --df-messenger-input-background:#F5F5FA;
+                  --df-messenger-input-box-background:#ffffff;
+                  --df-messenger-message-user-writing-image-width:250px;
+                  --df-messenger-focus-color:#6D02A3;
+                  --df-messenger-titlebar-padding:5px 15px;
+                  --df-messenger-citations-background:#F5F5FA;
+                  --df-messenger-send-icon-offset-y:0px;
+                  bottom: 0px;
+                }
+            `;
+      }else{
+        style.innerHTML =
+        `
+          df-messenger {
+            z-index: 999;
+            position: fixed;
+            --df-messenger-titlebar-background: #29003E;
+            --df-messenger-chat-background: #fff;
+            --df-messenger-internal-chat-bubble-size-offset: 50px;
+            --df-messenger-font-family: "Telia Sans";
+            --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
+            bottom: 16px;
+            right: 16px;
+          }
+          df-messenger-chat-bubble {
+            --df-messenger-chat-bubble-background: #29003E;
+            --df-messenger-chat-bubble-icon-size:40px;
+            --df-messenger-chat-window-height: calc(100vh - 200px);
+            --df-messenger-chat-window-width:360px;
+            --df-messenger-chat-background: #F5F5FA;
+            --df-messenger-message-bot-background: #F5E0FF;
+            --df-messenger-message-bot-font-color: #222222;
+            --df-messenger-message-bot-font-weight: 400;
+            --df-messenger-message-font-size: 16px;
+            --df-messenger-message-user-background: #fff;
+            --df-messenger-message-user-font-color: #222222;
+            --df-messenger-message-user-font-weight: 400;
+            --df-messenger-message-border-radius: 8px;
+            --df-messenger-send-icon-color: #6D02A3;
+            --df-messenger-input-padding: 0px;
+            --df-messenger-input-font-size: 16px;
+            --df-messenger-message-feedback-icon-font-color: #6D02A3;
+            --df-messenger-citations-font-color: #6D02A3;
+            --df-messenger-citations-border-color: #6D02A3;
+            --df-messenger-citations-border-radius: 50px;
+            --df-messenger-citations-font-size: 16px;
+            --df-messenger-citations-message-font-size: 14px;
+            --df-messenger-input-font-family:'Telia Sans';
+            --df-messenger-input-box-padding:10px 40px 12px 10px;
+            --df-messenger-input-background:#F5F5FA;
+            --df-messenger-input-box-background:#ffffff;
+            --df-messenger-message-user-writing-image-width:250px;
+            --df-messenger-focus-color:#6D02A3;
+            --df-messenger-titlebar-padding:5px 15px;
+            --df-messenger-citations-background:#F5F5FA;
+            --df-messenger-send-icon-offset-y:0px
+          }
+        `
+        document.head.appendChild(style);
+      }
+      document.head.appendChild(style);
 
     });
 
     window.addEventListener('df-response-received', (event) => {
-      setTimeout(checkFeedback, 100)
+     // setTimeout(checkFeedback, 100)
     });
 
     window.addEventListener('df-url-suggested', (event) => {
