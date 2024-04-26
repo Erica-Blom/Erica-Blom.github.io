@@ -20,7 +20,7 @@
 </head>
 
 <body>
-   <df-messenger
+  <df-messenger
   location="europe-west1"
   project-id="telia-se-digitalchannels"
   agent-id="6094ac83-e353-4e6e-917c-afb5c92062bb"
@@ -41,6 +41,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight;
       var styleUserInput = document.createElement('style');
       var messageListStyle = document.createElement('style');
       var chatbubbleStyle = document.createElement('style');
@@ -80,7 +81,7 @@
       var userInput = chat.shadowRoot.querySelector('df-messenger-user-input')
       var messages = messageList.querySelector('#message-list')
       privacyMessage.appendChild(linkToPage)
-      console.log(messageList)
+
       if (messages.firstChild) {
         messages.insertBefore(privacyMessage, messages.firstChild);
       } else {
@@ -91,7 +92,7 @@
       messageArea.shadowRoot.appendChild(messageListStyle)
       userInput.shadowRoot.appendChild(styleUserInput);
       //checkElementsExist();
-      console.log(screenWidth)
+
       var style = document.createElement('style');
       if(screenWidth <= 981){
 
@@ -112,7 +113,7 @@
                 df-messenger-chat-bubble {
                   --df-messenger-chat-bubble-background: #29003E;
                   --df-messenger-chat-bubble-icon-size:40px;
-                  --df-messenger-chat-window-height: calc(100vh);
+                  --df-messenger-chat-window-height: ${innerHeight}px;
                   --df-messenger-chat-window-width:calc(100vw);
                   --df-messenger-chat-background: #F5F5FA;
                   --df-messenger-message-bot-background: #F5E0FF;
