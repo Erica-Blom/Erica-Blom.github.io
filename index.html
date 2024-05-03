@@ -16,7 +16,8 @@
 
   <button id="myButton">Öppna chatten</button>
 
-    <df-messenger
+
+  <df-messenger
   location="europe-west1"
   project-id="telia-se-digitalchannels"
   agent-id="6094ac83-e353-4e6e-917c-afb5c92062bb"
@@ -29,6 +30,7 @@
   <script>
     var trigger = document.querySelector("df-messenger-chat-bubble");
     var chat = trigger.shadowRoot.querySelector("df-messenger-chat");
+    var userInput = chat.shadowRoot.querySelector("df-messenger-user-input");
     var messageList = chat.shadowRoot.querySelector("df-messenger-message-list");
     var messengerBotUtterance = messageList.shadowRoot?.querySelector(".entry.bot:last-child df-messenger-utterance");
     var messengerFeedback = messengerBotUtterance?.shadowRoot?.querySelector('df-messenger-feedback');
@@ -152,10 +154,9 @@
       /*End welcome message*/
 
       window.addEventListener('df-chat-open-changed', (event) => {
-        console.log(trigger.shadowRoot.querySelector('.chat-wrapper'))
-        console.log(`Chat is ${event.detail.isOpen ? 'open' : 'closed'}`);
         if(event.detail.isOpen === true){
-          setTimeout(document.querySelector('textarea.input-box').click(),300)
+          userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
+          console.log(userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box'))
         }
       });
 
@@ -412,7 +413,6 @@
     }
 
     function allUserUtterances(){
-      console.log(messageList)
       var userUtterances = messageList.shadowRoot.querySelectorAll('.content .user');
       userUtterances.forEach(utterance => {
         var userUtterance = utterance.querySelector('df-messenger-utterance');
@@ -423,7 +423,6 @@
 
     function allBotUtterances(){
       var botUtterances = messageList.shadowRoot.querySelectorAll('.content .bot');
-      console.log(botUtterances)
       botUtterances.forEach(utterance => {
         var botUtterance = utterance.querySelector('df-messenger-utterance');
         var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
@@ -431,9 +430,7 @@
         botUtterance.shadowRoot.appendChild(htmlMessageStyleClone);
         botUtterance?.shadowRoot.querySelector('df-html-message')?.shadowRoot.appendChild(botInnerMessageStyleClone);
         if(botUtterance.shadowRoot.querySelector('.message-stack.mid df-card')){
-          console.log(botUtterance.shadowRoot.querySelector('.message-stack.mid df-card').shadowRoot)
-          var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button')
-          
+          var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button');
           var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
           handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
         }
@@ -460,8 +457,6 @@
             let str = source2.innerText;
             let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
             let obj = JSON.parse(jsonStr);
-            console.log(obj)
-
             let title = obj.title;
 
             source2.innerText = title;
@@ -471,13 +466,8 @@
           if(source1?.innerText === source2?.innerText){
               var sourceStyleClone = sourceStyle.cloneNode(true);
               botUtterance?.shadowRoot.appendChild(sourceStyleClone);
-              console.log(source1, source2)
-          }
-
-            
+          }  
         });
-        
-
       }
   </script>
 </body>
