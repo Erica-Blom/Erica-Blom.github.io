@@ -155,7 +155,7 @@
         console.log(trigger.shadowRoot.querySelector('.chat-wrapper'))
         console.log(`Chat is ${event.detail.isOpen ? 'open' : 'closed'}`);
         if(event.detail.isOpen === true){
-          document.querySelector('textarea.input-box').focus();
+          setTimeout(document.querySelector('textarea.input-box').click(),300)
         }
       });
 
