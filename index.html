@@ -150,16 +150,6 @@
       /*End welcome message*/
 
       window.addEventListener('df-chat-open-changed', (event) => {
-        trigger.shadowRoot.querySelector('.chat-wrapper').classList.add('hidden');
-        trigger.shadowRoot.querySelector('.chat-wrapper').setAttribute('aria-expanded',
-          `${event.detail.isOpen}`)
-        console.log(`${event.detail.isOpen}`)
-        if(`${event.detail.isOpen}` === false){
-         console.log('gå till funktion')
-          addClassname();
-        }else{
-          addClassname()
-        }
         console.log(trigger.shadowRoot.querySelector('.chat-wrapper'))
         console.log(`Chat is ${event.detail.isOpen ? 'open' : 'closed'}`);
       });
