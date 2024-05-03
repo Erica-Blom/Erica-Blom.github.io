@@ -408,6 +408,7 @@
     }
     function checkAllSources(){
         var botUtterances = messageList.shadowRoot.querySelectorAll('.content .bot');
+      console.log('botUtterances',botUtterances)
         botUtterances.forEach(utterance => {
           var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-html-message");
           var source1 = botUtterance?.shadowRoot.querySelector('.bot-message p a')
