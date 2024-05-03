@@ -147,17 +147,6 @@
       /*End welcome message*/
 
       window.addEventListener('df-chat-open-changed', (event) => {
-        trigger.shadowRoot.querySelector('.chat-wrapper').classList.add('hidden');
-        trigger.shadowRoot.querySelector('.chat-wrapper').setAttribute('aria-expanded',
-          `${event.detail.isOpen}`)
-        console.log(`${event.detail.isOpen}`)
-        if(`${event.detail.isOpen}` === false){
-         console.log('gå till funktion')
-          addClassname();
-        }else{
-          addClassname()
-        }
-        console.log(trigger.shadowRoot.querySelector('.chat-wrapper'))
         console.log(`Chat is ${event.detail.isOpen ? 'open' : 'closed'}`);
       });
 
@@ -355,27 +344,27 @@
         var source1 = botUtterance?.shadowRoot?.querySelector('.bot-message p a')
         var source2 = botUtterance?.shadowRoot?.querySelector('.bot-message p:last-of-type a')
         if(source1?.innerText.includes('$sys.func.GET')){
-            let str = source1.innerText;
+            let str = source1?.innerText;
             let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
             let obj = JSON.parse(jsonStr);
             let title = obj.title;
 
-            source1.innerText = title;
-            source1.setAttribute('href', obj.uri)
-            source1.setAttribute('target', '_blank')
+            source1?.innerText = title;
+            source1?.setAttribute('href', obj.uri)
+            source1?.setAttribute('target', '_blank')
 
           }
           if(source2?.innerText.includes('$sys.func.GET')){
-            let str = source2.innerText;
+            let str = source2?.innerText;
             let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
             let obj = JSON.parse(jsonStr);
             console.log(obj)
 
             let title = obj.title;
 
-            source2.innerText = title;
-            source2.setAttribute('href', obj.uri)
-            source2.setAttribute('target', '_blank')
+            source2?.innerText = title;
+            source2?.setAttribute('href', obj.uri)
+            source2?.setAttribute('target', '_blank')
           }
         if(source1?.innerText === source2?.innerText){
             var sourceStyleClone = sourceStyle.cloneNode(true);
