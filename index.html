@@ -151,7 +151,7 @@ allow-feedback="none">
 
       var welcomeSubtitle = document.createElement('span');
       welcomeSubtitle.setAttribute('class', 'df-welcome-subtitle');
-      welcomeSubtitle.innerText = "Jag är ny här och kan svara fel ibland. Jag svarar inte på personliga ärenden.";
+      welcomeSubtitle.innerText = "Jag är ny här och kan svara fel ibland. Jag svarar inte på personliga ärenden..";
 
       welcomeContainer.appendChild(welcomeIcon)
       welcomeTitleContainer.appendChild(welcomeTitle)
@@ -186,7 +186,7 @@ allow-feedback="none">
       var style = document.createElement('style');
       if (screenWidth <= 600) {
         titlebarStyle.textContent=`
-          df-messenger-titlebar{position:fixed !important;top:0;left:0;width:100%;z-index:2}
+          df-messenger-titlebar{position:fixed !important;top:0;left:0;width:100%;z-index:2;display:flex;flex-direction:column;}
         `
         chat.appendChild(titlebarStyle);
         style.innerHTML = `
