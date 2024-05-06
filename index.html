@@ -59,7 +59,7 @@ allow-feedback="none">
       chatbubbleStyle.textContent = `
         .bubble{position:absolute !important; bottom:105px;right:900px}
         .container{position:relative}
-        .chat-wrapper.expanded{position:fixed !important;bottom:0px !important; animation: 1s ease-out 0s 1 slideInFromRight;}
+        .chat-wrapper.expanded{position:fixed !important;bottom:0px !important; animation: .25s ease forwards slideInFromRight;}
         .chat-wrapper.hidden{animation: 1s ease-out 0s 1 slideOutToRight;}
         
         
@@ -130,9 +130,7 @@ allow-feedback="none">
         #dfButtonWrapper{justify-content:center};
         #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
       `
-      titlebarStyle.textContent=`
-      df-messenger-titlebar{position:sticky !important}
-      `
+
   /*End custom style elements*/
     document.addEventListener('DOMContentLoaded', () => {
       var screenWidth = window.innerWidth;
@@ -163,8 +161,7 @@ allow-feedback="none">
 
       window.addEventListener('df-chat-open-changed', (event) => {
         if(event.detail.isOpen === true){
-          userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
-          console.log(userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box'))
+          setTimeout(userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus(),1000)
         }
       });
 
@@ -181,12 +178,17 @@ allow-feedback="none">
       }
       document.body.appendChild(htmlMessageStyle);
       messageArea.shadowRoot.appendChild(messageListStyle);
-      chat.appendChild(titlebarStyle);
+      
 
 
       /*For different styling in mobile*/
+
       var style = document.createElement('style');
       if (screenWidth <= 600) {
+        titlebarStyle.textContent=`
+          df-messenger-titlebar{position:fixed !important;top:0;left:0;width:100%;z-index:2}
+        `
+        chat.appendChild(titlebarStyle);
         style.innerHTML = `
                 df-messenger {
                     z-index: 999;
