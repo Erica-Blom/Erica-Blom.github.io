@@ -172,7 +172,7 @@ allow-feedback="none">
       });
       function setFocus(){
         console.log('fokuserar på fönstret')
-        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus()
+        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click()
       }
       var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
       var messageList = messageArea?.shadowRoot.querySelector('.message-list-wrapper');
