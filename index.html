@@ -186,7 +186,9 @@ allow-feedback="none">
       document.body.appendChild(htmlMessageStyle);
       messageArea.shadowRoot.appendChild(messageListStyle);
       
-
+      window.addEventListener('df-chip-clicked', (event) => {
+      event.preventDefault();
+      });
 
       /*For different styling in mobile*/
 
