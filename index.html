@@ -189,10 +189,7 @@ allow-feedback="none">
       messageArea.shadowRoot.appendChild(messageListStyle);
       
       window.addEventListener('df-chip-clicked', (event) => {
-        console.log(event)
         event.preventDefault();
-        const dfMessenger = document.querySelector('df-messenger');
-        dfMessenger.sendQuery(event.detail.text);
       });
 
       /*For different styling in mobile*/
