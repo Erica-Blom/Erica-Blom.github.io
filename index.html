@@ -163,9 +163,14 @@ allow-feedback="none">
 
       window.addEventListener('df-chat-open-changed', (event) => {
         if(event.detail.isOpen === true){
-          setTimeout(userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus(),1000)
+          console.log(event.detail.isOpen)
+          setTimeout(focusOnInput,5000)
         }
       });
+      function focusOnInput(){
+        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click()
+        console.log('klickad')
+      }
 
       var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
       var messageList = messageArea?.shadowRoot.querySelector('.message-list-wrapper');
