@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
   <title>Telia MVP</title>
 
@@ -165,11 +165,12 @@ allow-feedback="none">
       window.addEventListener('df-chat-open-changed', (event) => {
         if(event.detail.isOpen === true){
           console.log(event.detail.isOpen)
-          setTimeout(focusOnInput,5000)
+          setTimeout(focusOnInput,500)
         }
       });
       function focusOnInput(){
-        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click()
+        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
+        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').innerText = "hej"
         console.log('klickad')
       }
       var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
@@ -415,11 +416,16 @@ allow-feedback="none">
             source2.setAttribute('target', '_blank')
           }
         if(source1?.innerText === source2?.innerText){
-            var sourceStyleClone = sourceStyle.cloneNode(true);
-            botUtterance?.shadowRoot.appendChild(sourceStyleClone)
+            //var sourceStyleClone = sourceStyle.cloneNode(true);
+            //botUtterance?.shadowRoot.appendChild(sourceStyleClone);
+            source2?.remove();
         }
         source1?.setAttribute("target","_blank");
         source2?.setAttribute("target","_blank")
+
+        if(source1.href.includes('https://www.telia.se/produkt')){
+          source2?.remove()
+        }
       }
       function addFeedbackStyle(utterance){
         if(utterance.shadowRoot.querySelector('df-messenger-feedback')){
@@ -430,9 +436,6 @@ allow-feedback="none">
       function checkIfBulletlist(response){
 
           var utterance = messageList.shadowRoot.querySelector('.bot:last-child df-messenger-utterance');
-        console.log("utterance",utterance)
-        console.log("bot",utterance?.shadowRoot.querySelector("df-html-message"))
-        console.log("botShadowroot",utterance?.shadowRoot.querySelector("df-html-message").shadowRoot.querySelector('.bot-message span'));
           var botUtterance = utterance?.shadowRoot.querySelector("df-html-message").shadowRoot.querySelector('.bot-message span > span');
             var message = botUtterance?.innerText
            if(message.includes('- **')){
