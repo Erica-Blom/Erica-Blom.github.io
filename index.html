@@ -430,6 +430,9 @@ allow-feedback="none">
       function checkIfBulletlist(response){
 
           var utterance = messageList.shadowRoot.querySelector('.bot:last-child df-messenger-utterance');
+        console.log("utterance",utterance)
+        console.log("bot",utterance?.shadowRoot.querySelector("df-html-message"))
+        console.log("botShadowroot",utterance?.shadowRoot.querySelector("df-html-message").shadowRoot.querySelector('.bot-message span'));
           var botUtterance = utterance?.shadowRoot.querySelector("df-html-message").shadowRoot.querySelector('.bot-message span > span');
             var message = botUtterance?.innerText
            if(message.includes('- **')){
