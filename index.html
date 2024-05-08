@@ -15,6 +15,7 @@
 <body>
 
   <button id="myButton">Öppna chatten</button>
+
 <df-messenger
 location="europe-west1"
 project-id="telia-se-digitalchannels"
@@ -103,7 +104,6 @@ allow-feedback="none">
         .df-welcome-container{margin:auto;text-align:center;color:rgba(0, 0, 0, 0.62)}
         .df-welcome-container .df-welcome-icon{background-color:rgba(0, 0, 0, 0.05);border-radius:50%;height:48px;width:48px;margin:auto;background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M10.4596 17.121L7.9441 16.0077L10.3908 14.9393C10.3908 14.9393 10.3909 14.9393 10.3909 14.9393C11.53 14.442 12.4431 13.5318 12.9407 12.3876C12.9407 12.3875 12.9408 12.3874 12.9408 12.3873L14.0023 9.95289L15.0642 12.3882C15.561 13.5277 16.4706 14.4415 17.6144 14.9396C17.6145 14.9396 17.6146 14.9397 17.6147 14.9397L20.0494 16.0026L17.6139 17.0659C17.6138 17.0659 17.6138 17.0659 17.6138 17.0659C16.475 17.563 15.562 18.473 15.0643 19.6168C15.0643 19.6169 15.0643 19.6169 15.0642 19.6169C15.0641 19.6173 15.064 19.6176 15.0638 19.6179L14.0088 22.0365L12.9985 19.6876C12.9984 19.6873 12.9983 19.687 12.9981 19.6868C12.5067 18.5409 11.5997 17.6247 10.4603 17.1213C10.4603 17.1213 10.4602 17.1212 10.4602 17.1212C10.46 17.1211 10.4598 17.121 10.4596 17.121Z' stroke='%23990AE3' stroke-width='2'/%3E%3Cpath d='M9.89047 6.83371L8.00695 6.01142C7.55143 5.81309 7.18864 5.44891 6.99044 4.99427L6.16865 3.1096C6.1049 2.96347 5.89742 2.96347 5.83367 3.1096L5.01188 4.99427C4.81368 5.45007 4.44972 5.81309 3.99536 6.01142L2.10953 6.83487C1.96349 6.89866 1.96349 7.10511 2.10953 7.1689L4.02782 8.01787C4.48218 8.21851 4.84381 8.58385 5.0397 9.04081L5.83483 10.8895C5.89742 11.0368 6.10606 11.0368 6.16981 10.8895L6.99044 9.00834C7.18864 8.55254 7.55259 8.18952 8.00695 7.99119L9.89047 7.1689C10.0365 7.10511 10.0365 6.8975 9.89047 6.83371Z' fill='%23990AE3'/%3E%3Cpath d='M13.9452 1.91686L13.0035 1.50571C12.7757 1.40655 12.5943 1.22446 12.4952 0.997137L12.0843 0.0548005C12.0524 -0.0182668 11.9487 -0.0182668 11.9168 0.0548005L11.5059 0.997137C11.4068 1.22504 11.2249 1.40655 10.9977 1.50571L10.0548 1.91744C9.98174 1.94933 9.98174 2.05255 10.0548 2.08445L11.0139 2.50893C11.2411 2.60926 11.4219 2.79193 11.5198 3.02041L11.9174 3.94476C11.9487 4.01841 12.053 4.01841 12.0849 3.94476L12.4952 3.00417C12.5943 2.77627 12.7763 2.59476 13.0035 2.4956L13.9452 2.08445C14.0183 2.05255 14.0183 1.94875 13.9452 1.91686Z' fill='%23990AE3'/%3E%3C/svg%3E");background-repeat:no-repeat; background-position:center center;}
         .df-welcome-title-container .df-welcome-title{font-size:20px;font-weight:700;text-align:center;line-height:25px;color:rgba(0, 0, 0, 0.8); margin-top:16px;margin-bottom:16px}
-
         .df-welcome-container .df-welcome-title-container .df-welcome-subtitle{color:rgba(0, 0, 0, 0.62) !important;font-size:14px;}
         `
 
@@ -190,37 +190,28 @@ allow-feedback="none">
 
 
       /*For different styling in mobile*/
+     const createStyleElement = (content) => {
+        const style = document.createElement('style');
+        style.innerText = content;
+        return style;
+      };
 
-      var style = document.createElement('style');
-      if (screenWidth <= 600) {
-        titlebarStyle.textContent=`
-          df-messenger-titlebar{position:fixed !important;top:0;left:0;width:100%;z-index:2}
-        `
-        chat.appendChild(titlebarStyle);
-        style.innerHTML = `
-                df-messenger {
-                    z-index: 999;
-                    position: fixed;
+      const commonStyles = `
+      df-messenger {
+        z-index: 999;
+        position: fixed;
                     --df-messenger-titlebar-background: #FFFFFF;
                     --df-messenger-titlebar-title-font-weight:700;
                     --df-messenger-titlebar-title-font-size:20px;
                     --df-messenger-chat-background: #FFFFFF;
                     --df-messenger-chat-padding:20px;
-                    --df-messenger-internal-chat-bubble-size-offset: 0px;
-                    --df-messenger-font-family: "Telia Sans";
-                    --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
-                    --df-messenger-link-font-color:#6D02A3;
-                    --df-messenger-message-spacing:16px;
-                    --df-messenger-message-feedback-spacing:10px;
                 }
-
-                df-messenger-chat-bubble {
-                  --df-messenger-default-border-color:#FFFFFF;
+      df-messenger-chat-bubble {
+        --df-messenger-default-border-color:#FFFFFF;
                   --df-messenger-default-border:1px solid #FFFFFF;
                   --df-messenger-chat-bubble-background: #FFFFFF;
                   --df-messenger-chat-bubble-icon-size:40px;
                   --df-messenger-chat-window-height: ${innerHeight}px;
-                  --df-messenger-chat-window-width:${innerWidth}px;
                   --df-messenger-chat-background: #FFFFFF;
                   --df-messenger-chat-scroll-button-display:block;
                   --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
@@ -258,8 +249,6 @@ allow-feedback="none">
                   --df-messenger-titlebar-border-bottom:rgba(0, 0, 0, 0.1) 1px solid;
                   --df-messenger-citations-background:#F5F5FA;
                   --df-messenger-send-icon-offset-y:1px;
-                  --df-messenger-default-chat-border-radius:0px;
-                  --df-messenger-message-padding:16px;
                   --df-messenger-card-background:#4E0174;
                   --df-messenger-button-border-radius:50px;
                   --df-messenger-button-font-color:#FFFFFF;
@@ -267,88 +256,55 @@ allow-feedback="none">
                   --df-messenger-button-font-size:16px;
                   --df-messenger-link-visited-font-color:#6D02A3;
                   --df-messenger-link-hover-font-color:#4E0174;
-                }
-            `;
+      }
+      `;
 
-      } else {
-        style.innerHTML =
-          `
-          df-messenger {
-            z-index: 999;
-            position: fixed;
-            --df-messenger-titlebar-background: #FFFFFF;
-            --df-messenger-titlebar-title-font-weight:700;
-            --df-messenger-titlebar-title-font-size:20px;
-            --df-messenger-chat-border-radius:16px 0px 0px 16px;
-            --df-messenger-chat-background: #FFFFFF;
-            --df-messenger-chat-padding:20px;
-            --df-messenger-internal-chat-bubble-size-offset: 50px;
-            --df-messenger-font-family: "Telia Sans";
-            --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
-            --df-messenger-link-font-color:#6D02A3;
-            --df-messenger-message-spacing:16px;
-            --df-messenger-message-feedback-spacing:10px;
-            --df-messenger-link-visited-font-color:#6D02A3;
-          }
-          df-messenger-chat-bubble {
+      const mobileStyles = `
+      df-messenger-titlebar{
+        position:fixed !important;
+        top:0;left:0;
+        width:100%;
+        z-index:2
+      }
+      df-messenger {
+        --df-messenger-internal-chat-bubble-size-offset: 0px;
+      }
+        df-messenger-chat-bubble {
+          --df-messenger-chat-window-width:${innerWidth}px;
+          --df-messenger-default-chat-border-radius:0px;
+          --df-messenger-message-padding:16px;
+        }
+      `;
 
-            --df-messenger-default-border-color:#FFFFFF;
-            --df-messenger-default-border:1px solid #FFFFFF;
-            --df-messenger-chat-bubble-background: #FFFFFF;
-            --df-messenger-chat-bubble-icon-size:40px;
-            --df-messenger-chat-window-height: ${innerHeight}px;
-            --df-messenger-chat-window-width:480px;
-            --df-messenger-chat-background: #FFFFFF;
-            --df-messenger-chat-scroll-button-display:block;
-            --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
-            --df-messenger-chat-scroll-button-padding:16px;
-            --df-messenger-chat-scroll-button-text-display:none;
-            --df-messenger-message-bot-background: #F5F5FA;
-            --df-messenger-message-bot-font-color: rgba(0, 0, 0, 0.8);
-            --df-messenger-message-bot-font-weight: 400;
-            --df-messenger-message-font-size: 16px;
-            --df-messenger-message-user-background: #FAF0FF;
-            --df-messenger-message-user-font-color: rgba(0, 0, 0, 0.8);
-            --df-messenger-message-user-font-weight: 400;
-            --df-messenger-message-border-radius: 8px;
-            --df-messenger-message-padding:16px;
-            --df-messenger-send-icon-color: #FFFFFF;
-            --df-messenger-send-icon-color-disabled:#FFFFFF;
-            --df-messenger-input-padding: 0px;
-            --df-messenger-input-font-size: 16px;
-            --df-messenger-message-feedback-icon-font-color: #6D02A3;
-            --df-messenger-message-feedback-icon-font-color-active:#29003E;
-            --df-messenger-citations-font-color: #6D02A3;
-            --df-messenger-citations-border-color: #6D02A3;
-            --df-messenger-citations-border-radius: 50px;
-            --df-messenger-citations-font-size: 16px;
-            --df-messenger-citations-message-font-size: 14px;
-            --df-messenger-input-font-family:'Telia Sans';
-            --df-messenger-input-box-padding:10px 40px 12px 10px;
-            --df-messenger-input-inner-padding:0px 40px 0px 0px;
-            --df-messenger-input-background:#FFFFFF;
-            --df-messenger-input-box-background:#ffffff;
-            --df-messenger-input-box-border:1px solid rgba(0, 0, 0, 0.44);
-            --df-messenger-input-box-border-radius:4px 0px 0px 4px;
-            --df-messenger-message-user-writing-image-width:250px;
-            --df-messenger-focus-color:#6D02A3;
-            --df-messenger-titlebar-padding:5px 15px;
-            --df-messenger-titlebar-font-color:rgba(0, 0, 0, 0.8);
-            --df-messenger-titlebar-border-bottom:rgba(0, 0, 0, 0.1) 1px solid;
-            --df-messenger-citations-background:#F5F5FA;
-            --df-messenger-send-icon-offset-y:1px;
-            --df-messenger-card-background:#4E0174;
-            --df-messenger-button-border-radius:50px;
-            --df-messenger-button-font-color:#FFFFFF;
-            --df-messenger-button-text-align:center;
-            --df-messenger-button-font-size:16px;
-            --df-messenger-link-visited-font-color:#6D02A3;
-            --df-messenger-link-hover-font-color:#4E0174;
+      const desktopStyles = `
+        df-messenger {
+          --df-messenger-chat-border-radius:16px 0px 0px 16px;
+          --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
+          --df-messenger-internal-chat-bubble-size-offset: 50px;
+          --df-messenger-link-visited-font-color:#6D02A3;
+        }
+        df-messenger-chat-bubble {
+          --df-messenger-chat-window-width:480px;
+          --df-messenger-message-padding:16px;
+          --df-messenger-input-inner-padding:0px 40px 0px 0px;
+        }
+      `;
+
+      document.head.appendChild(createStyleElement(commonStyles + (screenWidth <= 600 ? mobileStyles : desktopStyles)));
+      trigger.shadowRoot.appendChild(chatbubbleStyle);
+
+      if (screenWidth <= 600) {
+        titlebarStyle.textContent=`
+          df-messenger-titlebar{
+            position:fixed !important;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:2
           }
         `
+        chat.appendChild(titlebarStyle);
       }
-      document.head.appendChild(style);
-      trigger.shadowRoot.appendChild(chatbubbleStyle);
       checkElementsExist();
     });
 
@@ -357,7 +313,9 @@ allow-feedback="none">
     });
 
     window.addEventListener('df-response-received', (event) => {
-      
+      console.log("event data:",event.data)
+      console.log("event raw:",event.raw)
+      console.log('event',event)
       setTimeout(addBotUtteranceStyle, 50);
     });
 
@@ -423,9 +381,26 @@ allow-feedback="none">
         }
         source1?.setAttribute("target","_blank");
         source2?.setAttribute("target","_blank")
-
-        if(source1.href.includes('https://www.telia.se/produkt')){
+        console.log("source1 href: ", source1.href)
+        if(source1 && source1.href.includes('https://www.telia.se/produkt')){
+          console.log("produkt hittad")
           source2?.remove()
+          const dfMessenger = document.querySelector('df-messenger');
+          const payload = [
+            {
+              "type": "info",
+              "title": "Info item title",
+              "subtitle": "Info item subtitle",
+              "image": {
+                "rawUrl": "https://example.com/images/logo.png"
+              },
+              "anchor": {
+                "href": "https://example.com",
+                "target": "_blank"
+              }
+            }
+          ];
+          dfMessenger.renderCustomCard(payload);
         }
       }
       function addFeedbackStyle(utterance){
