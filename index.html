@@ -14,7 +14,7 @@
 
 <body>
 
-  <button id="myButton">Öppna chatten2</button>
+  <button id="myButton">Öppna chatten3</button>
  <df-messenger
 location="europe-west1"
 project-id="telia-se-digitalchannels"
@@ -37,6 +37,7 @@ allow-feedback="none">
     var agentHandoverOffered = false;
 
     window.addEventListener('DOMContentLoaded', (event) => {
+      console.log('sidan laddad')
       document.querySelector('#myButton').addEventListener('click', openDFMessenger);
     });
 
@@ -172,6 +173,11 @@ allow-feedback="none">
         //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
         console.log('klickad')
       }
+      window.visualViewport.addEventListener('resize', function() {
+    var viewportHeight = window.visualViewport.height;
+    document.querySelector('.header').style.height = viewportHeight + 'px';
+  });
+
       window.visualViewport.addEventListener('resize', function() {
       var viewportHeight = window.visualViewport.height;
       document.querySelector('.header').style.height = viewportHeight + 'px';
