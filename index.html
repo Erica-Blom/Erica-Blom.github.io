@@ -437,10 +437,12 @@ allow-feedback="none">
           var utterance = messageList.shadowRoot.querySelector('.bot:last-child df-messenger-utterance');
           var botUtterance = utterance?.shadowRoot.querySelector("df-html-message").shadowRoot.querySelector('.bot-message span > span');
             var message = botUtterance?.innerText
+        console.log('message: ', message)
            if(message.includes('- **')){
+             
            message = message.replace(/- \*\*/g, '\n• ');
            message = message.replace(/\*\*/g, '');
-
+console.log('make list ', message)
            message.innerText = message;
           }
       }
