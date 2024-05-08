@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=overlays-content">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
   <title>Telia MVP</title>
 
@@ -14,8 +14,9 @@
 
 <body>
 
-  <button id="myButton">Öppna chatten3</button>
- <df-messenger
+  <button id="myButton">Öppna chatten :)</button>
+
+<df-messenger
 location="europe-west1"
 project-id="telia-se-digitalchannels"
 agent-id="6094ac83-e353-4e6e-917c-afb5c92062bb"
@@ -37,7 +38,6 @@ allow-feedback="none">
     var agentHandoverOffered = false;
 
     window.addEventListener('DOMContentLoaded', (event) => {
-      console.log('sidan laddad')
       document.querySelector('#myButton').addEventListener('click', openDFMessenger);
     });
 
@@ -57,6 +57,10 @@ allow-feedback="none">
       var sourceStyle = document.createElement('style');
       var handoverButtonStyle = document.createElement('style');
       var titlebarStyle = document.createElement('style');
+      var chatWrapperStyle = document.createElement('style');
+      chatWrapperStyle.textContent = `
+      .message-list-wrapper{max-height:50%}
+      `
       chatbubbleStyle.textContent = `
         .bubble{position:absolute !important; bottom:105px;right:900px}
         .container{position:relative}
@@ -137,6 +141,7 @@ allow-feedback="none">
 
   /*End custom style elements*/
     document.addEventListener('DOMContentLoaded', () => {
+      chat.shadowRoot.appendChild(chatWrapperStyle);
       var screenWidth = window.innerWidth;
       var screenHeight = window.innerHeight;
       
@@ -170,14 +175,9 @@ allow-feedback="none">
         }
       });
       function focusOnInput(){
-        //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
+        userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
         console.log('klickad')
       }
-      window.visualViewport.addEventListener('resize', function() {
-    var viewportHeight = window.visualViewport.height;
-    document.querySelector('.header').style.height = viewportHeight + 'px';
-  });
-
       window.visualViewport.addEventListener('resize', function() {
       var viewportHeight = window.visualViewport.height;
       document.querySelector('.header').style.height = viewportHeight + 'px';
