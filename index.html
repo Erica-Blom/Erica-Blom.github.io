@@ -14,9 +14,11 @@
 
 <body>
 
-  <button id="myButton">Öppna chatten :)</button>
+  <button id="myButton">Öppna chatten</button>
 
-<df-messenger
+  <!--<df-messenger location="global" project-id="convhub-delivery-dev-cx" agent-id="94cc8700-d7b0-4ae2-8beb-16f971ef84c3"
+  language-code="sv" allow-feedback="none">-->
+  <df-messenger
 location="europe-west1"
 project-id="telia-se-digitalchannels"
 agent-id="6094ac83-e353-4e6e-917c-afb5c92062bb"
@@ -57,10 +59,7 @@ allow-feedback="none">
       var sourceStyle = document.createElement('style');
       var handoverButtonStyle = document.createElement('style');
       var titlebarStyle = document.createElement('style');
-      var chatWrapperStyle = document.createElement('style');
-      chatWrapperStyle.textContent = `
-      .message-list-wrapper{max-height:50%}
-      `
+
       chatbubbleStyle.textContent = `
         .bubble{position:absolute !important; bottom:105px;right:900px}
         .container{position:relative}
@@ -141,7 +140,6 @@ allow-feedback="none">
 
   /*End custom style elements*/
     document.addEventListener('DOMContentLoaded', () => {
-      chat.shadowRoot.appendChild(chatWrapperStyle);
       var screenWidth = window.innerWidth;
       var screenHeight = window.innerHeight;
       
@@ -215,6 +213,7 @@ allow-feedback="none">
                     --df-messenger-titlebar-title-font-size:20px;
                     --df-messenger-chat-background: #FFFFFF;
                     --df-messenger-chat-padding:20px;
+                    --df-messenger-font-family:Telia Sans;
                 }
       df-messenger-chat-bubble {
         --df-messenger-default-border-color:#FFFFFF;
@@ -323,9 +322,6 @@ allow-feedback="none">
     });
 
     window.addEventListener('df-response-received', (event) => {
-      console.log("event data:",event.data)
-      console.log("event raw:",event.raw)
-      console.log('event',event)
       setTimeout(addBotUtteranceStyle, 50);
     });
 
@@ -364,8 +360,8 @@ allow-feedback="none">
       function checkSources(botUtterance){
         var source1 = botUtterance?.shadowRoot?.querySelector('.bot-message p a')
         var source2 = botUtterance?.shadowRoot?.querySelector('.bot-message p:last-of-type a')
-        if(source1?.innerText.includes('$sys.func.GET')){
-            let str = source1.innerText;
+        if(source1 && source1.innerText.includes('$sys.func.GET')){
+            let str = source1?.innerText;
             let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
             let obj = JSON.parse(jsonStr);
             let title = obj.title;
@@ -392,26 +388,8 @@ allow-feedback="none">
         }
         source1?.setAttribute("target","_blank");
         source2?.setAttribute("target","_blank")
-        console.log("source1 href: ", source1.href)
         if(source1 && source1.href.includes('https://www.telia.se/produkt')){
-          console.log("produkt hittad")
           source2?.remove()
-          const dfMessenger = document.querySelector('df-messenger');
-          const payload = [
-            {
-              "type": "info",
-              "title": "Info item title",
-              "subtitle": "Info item subtitle",
-              "image": {
-                "rawUrl": "https://example.com/images/logo.png"
-              },
-              "anchor": {
-                "href": "https://example.com",
-                "target": "_blank"
-              }
-            }
-          ];
-          dfMessenger.renderCustomCard(payload);
         }
       }
       function addFeedbackStyle(utterance){
@@ -421,15 +399,12 @@ allow-feedback="none">
         }
       }
       function checkIfBulletlist(response){
-
-          var utterance = messageList.shadowRoot.querySelector('.bot:last-child df-messenger-utterance');
-          var botUtterance = utterance?.shadowRoot.querySelector("df-html-message").shadowRoot.querySelector('.bot-message span > span');
-            var message = botUtterance?.innerText
-           if(message.includes('- **')){
-           message = message.replace(/- \*\*/g, '\n• ');
-           message = message.replace(/\*\*/g, '');
-
-           message.innerText = message;
+          var botMessage = response.shadowRoot.querySelector('.bot-message span span')
+          var messageText = botMessage.innerText
+          if(messageText.includes('- **')){
+           messageText = messageText.replace(/-\s\*\*/g, '\n• ');
+           messageText = messageText.replace(/\*\*/g, ' ')
+           botMessage.innerText = messageText;
           }
       }
     function checkElementsExist() {
@@ -501,12 +476,12 @@ allow-feedback="none">
         var botUtterances = messageList.shadowRoot.querySelectorAll('.content .bot');
         botUtterances.forEach(utterance => {
           var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-custom-template");
-          console.log(botUtterance)
+
           if(botUtterance){
             agentHandoverOffered = true
-            var element;console.log('botutterance handover', agentHandoverOffered)
-                element = new CustomElementAgentHandover
-                botUtterance.appendChild(element)
+            var element;
+            element = new CustomElementAgentHandover
+            botUtterance.appendChild(element)
           }
         })
         agentHandoverOffered = false;
@@ -519,7 +494,6 @@ allow-feedback="none">
           this.renderRoot = this.attachShadow({mode: 'open'});
         }
         connectedCallback() {
-          console.log('connected callback')
           var buttonStyle = document.createElement('style');
           var div = document.createElement('div');
           var button = document.createElement('button');
