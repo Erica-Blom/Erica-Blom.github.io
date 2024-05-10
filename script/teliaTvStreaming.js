@@ -146,7 +146,7 @@ function openDFMessenger() {
   }
 
   var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
-  var messageList = messageArea?.shadowRoot.querySelector('.message-list-wrapper');
+  var messageList = messageArea.shadowRoot.querySelector('.message-list-wrapper');
   var messages = messageList.querySelector('#message-list .content');
   var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
   userInput.shadowRoot.appendChild(styleUserInput);
@@ -282,31 +282,34 @@ function openDFMessenger() {
 
 
 window.addEventListener('df-request-sent', (event) => {
-    setTimeout(addUserUtteranceStyle, 50);
+    setTimeout(addUserUtteranceStyle, 100);
 });
 
 window.addEventListener('df-response-received', (event) => {
-  setTimeout(addBotUtteranceStyle, 50);
+  setTimeout(addBotUtteranceStyle, 100);
 });
 
 
 function addUserUtteranceStyle() {
-    var userUtterances = messageList.shadowRoot.querySelectorAll('.content .user');
-    var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true); 
-    var utterance;
-    if(userUtterances.length>0){
-      var lastUserUtterance = userUtterances[userUtterances.length - 1];
-      utterance = lastUserUtterance.querySelector('df-messenger-utterance');
-      utterance.shadowRoot.appendChild(userInnerMessageStyleClone);
-    }else{
-      utterance = messageList.shadowRoot.querySelector('.content .user df-messenger-utterance');
-      utterance.shadowRoot.appendChild(userInnerMessageStyleClone);
+    var userUtterances = messageList.querySelectorAll('.content .user');
+    if(userUtterances){
+      var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true); 
+      var utterance;
+      if(userUtterances.length>0){
+        var lastUserUtterance = userUtterances[userUtterances.length - 1];
+        utterance = lastUserUtterance.querySelector('df-messenger-utterance');
+        utterance.shadowRoot.appendChild(userInnerMessageStyleClone);
+      }else{
+        utterance = messageList.shadowRoot.querySelector('.content .user df-messenger-utterance');
+        utterance.shadowRoot.appendChild(userInnerMessageStyleClone);
+      }
+      utterance.shadowRoot.appendChild(userInnerMessageStyle);
     }
-    utterance.shadowRoot.appendChild(userInnerMessageStyle);
   }
 
   function addBotUtteranceStyle() {
-    var utterance = messageList.shadowRoot.querySelector('.bot:last-child df-messenger-utterance');
+    console.log("add bot utterance", messageList)
+    var utterance = messageList.querySelector('.bot:last-child df-messenger-utterance');
     var botUtterance = utterance?.shadowRoot.querySelector("df-html-message");
     var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
     var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);  
@@ -363,9 +366,10 @@ function addUserUtteranceStyle() {
     }
   }
   function checkIfBulletlist(response){
+    console.log(response)
       var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
       var messageText = botMessage?.innerText
-      if(messsageText && messageText?.includes('- **')){
+      if(messageText && messageText?.includes('- **')){
        messageText = messageText.replace(/-\s\*\*/g, '\n• ');
        messageText = messageText.replace(/\*\*/g, ' ')
        botMessage.innerText = messageText;
@@ -380,7 +384,8 @@ function checkElementsExist() {
 }
 
 function allUserUtterances(){
-  var userUtterances = messageList?.shadowRoot?.querySelectorAll('.content .user');
+  console.log(messageList)
+  var userUtterances = messageList.querySelectorAll('.content .user');
   userUtterances?.forEach(utterance => {
     var userUtterance = utterance.querySelector('df-messenger-utterance');
     var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true); 
@@ -389,7 +394,7 @@ function allUserUtterances(){
 }
 
 function allBotUtterances(){
-  var botUtterances = messageList?.shadowRoot?.querySelectorAll('.content .bot');
+  var botUtterances = messageList.querySelectorAll('.content .bot');
   botUtterances?.forEach(utterance => {
     var botUtterance = utterance.querySelector('df-messenger-utterance');
     var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
