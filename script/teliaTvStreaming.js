@@ -1,22 +1,22 @@
 window.addEventListener('DOMContentLoaded', () => {
   console.log("CONTENT LOADED")
   var trigger = document.querySelector("df-messenger-chat-bubble");
-var chat = trigger.shadowRoot.querySelector("df-messenger-chat");
-var userInput = chat.shadowRoot.querySelector("df-messenger-user-input");
-var messageList = chat.shadowRoot.querySelector("df-messenger-message-list");
-var messengerBotUtterance = messageList.shadowRoot?.querySelector(".entry.bot:last-child df-messenger-utterance");
-var messengerFeedback = messengerBotUtterance?.shadowRoot?.querySelector('df-messenger-feedback');
-var citations = messengerBotUtterance?.shadowRoot?.querySelector("df-citations");
-var agentHandoverOffered = false;
+  var chat = trigger.shadowRoot.querySelector("df-messenger-chat");
+  var userInput = chat.shadowRoot.querySelector("df-messenger-user-input");
+  var messageList = chat.shadowRoot.querySelector("df-messenger-message-list");
+  var messengerBotUtterance = messageList.shadowRoot?.querySelector(".entry.bot:last-child df-messenger-utterance");
+  var messengerFeedback = messengerBotUtterance?.shadowRoot?.querySelector('df-messenger-feedback');
+  var citations = messengerBotUtterance?.shadowRoot?.querySelector("df-citations");
+  var agentHandoverOffered = false;
   document.querySelector('#myButton').addEventListener('click', openDFMessenger);
 
 
-function openDFMessenger() {
-  const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
-  dfMessengerBubble.openChat();
-};
+  function openDFMessenger() {
+    const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
+    dfMessengerBubble.openChat();
+  };
 
-/*Custom style elements*/
+  /*Custom style elements*/
   var styleUserInput = document.createElement('style');
   var messageListStyle = document.createElement('style');
   var chatbubbleStyle = document.createElement('style');
@@ -31,7 +31,7 @@ function openDFMessenger() {
   chatbubbleStyle.textContent = `
     .bubble{position:absolute !important; bottom:105px;right:900px}
     .container{position:relative}
-    .chat-wrapper.expanded{position:fixed !important;bottom:0px !important; animation: .25s ease forwards slideInFromRight;}
+    .chat-wrapper.expanded{position:fixed !important;bottom:0px !important; animation: .25s ease forwards slideInFromRight; border-top-right-radius:0px !important}
     .chat-wrapper.hidden{animation: 1s ease-out 0s 1 slideOutToRight;}
     
     
@@ -105,70 +105,13 @@ function openDFMessenger() {
     #dfButtonWrapper{justify-content:center};
     #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
   `
-
-/*End custom style elements*/
-
-  var screenWidth = window.innerWidth;
-  var screenHeight = window.innerHeight;
-  
-/*Welcome message*/
-  var welcomeContainer = document.createElement('div');
-  welcomeContainer.setAttribute('class', 'df-welcome-container');
-  
-  var welcomeIcon = document.createElement('div');
-  welcomeIcon.setAttribute('class', 'df-welcome-icon');
-  
-  var welcomeTitleContainer = document.createElement('div');
-  welcomeTitleContainer.setAttribute('class', 'df-welcome-title-container');
-  var welcomeTitle = document.createElement('h3');
-  welcomeTitle.setAttribute('class', 'df-welcome-title');
-  welcomeTitle.innerText = "Vad kan jag hjälpa dig med?";
-
-  var welcomeSubtitle = document.createElement('span');
-  welcomeSubtitle.setAttribute('class', 'df-welcome-subtitle');
-  welcomeSubtitle.innerText = "Jag är ny här och kan svara fel ibland. Jag svarar inte på personliga ärenden.";
-
-  welcomeContainer.appendChild(welcomeIcon)
-  welcomeTitleContainer.appendChild(welcomeTitle)
-  welcomeContainer.appendChild(welcomeTitleContainer)
-  welcomeContainer.appendChild(welcomeSubtitle)
-  /*End welcome message*/
-
-  window.addEventListener('df-chat-open-changed', (event) => {
-    if(event.detail.isOpen === true){
-      console.log(event.detail.isOpen)
-      setTimeout(focusOnInput,500)
-    }
-  });
-  function focusOnInput(){
-    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
-    console.log('klickad')
-  }
-
-  var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
-  var messageList = messageArea.shadowRoot.querySelector('.message-list-wrapper');
-  var messages = messageList.querySelector('#message-list .content');
-  var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
-  userInput.shadowRoot.appendChild(styleUserInput);
-
-  if (messages.firstChild) {
-    messages.insertBefore(welcomeContainer, messages.firstChild);
-  } else {
-    messages.appendChild(welcomeContainer);
-  }
-  document.body.appendChild(htmlMessageStyle);
-  messageArea.shadowRoot.appendChild(messageListStyle);
-  
-
-
-  /*For different styling in mobile*/
- const createStyleElement = (content) => {
-    const style = document.createElement('style');
+  var createStyleElement = (content) => {
+    var style = document.createElement('style');
     style.innerText = content;
     return style;
   };
 
-  const commonStyles = `
+  var commonStyles = `
   df-messenger {
     z-index: 999;
     position: fixed;
@@ -251,7 +194,7 @@ function openDFMessenger() {
 
   const desktopStyles = `
     df-messenger {
-      --df-messenger-chat-border-radius:16px 0px 0px 16px;
+      --df-messenger-chat-border-radius:16px;
       --df-messenger-chat-border: rgba(0, 0, 0, 0.16) solid 1px;
       --df-messenger-internal-chat-bubble-size-offset: 50px;
       --df-messenger-link-visited-font-color:#6D02A3;
@@ -267,7 +210,7 @@ function openDFMessenger() {
   trigger.shadowRoot.appendChild(chatbubbleStyle);
 
   if (screenWidth <= 600) {
-    titlebarStyle.textContent=`
+    titlebarStyle.textContent = `
       df-messenger-titlebar{
         position:fixed !important;
         top:0;
@@ -278,28 +221,81 @@ function openDFMessenger() {
     `
     chat.appendChild(titlebarStyle);
   }
+  /*End custom style elements*/
+
+  var screenWidth = window.innerWidth;
+  var screenHeight = window.innerHeight;
+
+  /*Welcome message*/
+  var welcomeContainer = document.createElement('div');
+  welcomeContainer.setAttribute('class', 'df-welcome-container');
+
+  var welcomeIcon = document.createElement('div');
+  welcomeIcon.setAttribute('class', 'df-welcome-icon');
+
+  var welcomeTitleContainer = document.createElement('div');
+  welcomeTitleContainer.setAttribute('class', 'df-welcome-title-container');
+  var welcomeTitle = document.createElement('h3');
+  welcomeTitle.setAttribute('class', 'df-welcome-title');
+  welcomeTitle.innerText = "Vad kan jag hjälpa dig med?";
+
+  var welcomeSubtitle = document.createElement('span');
+  welcomeSubtitle.setAttribute('class', 'df-welcome-subtitle');
+  welcomeSubtitle.innerText = "Jag är ny här och kan svara fel ibland. Jag svarar inte på personliga ärenden.";
+
+  welcomeContainer.appendChild(welcomeIcon)
+  welcomeTitleContainer.appendChild(welcomeTitle)
+  welcomeContainer.appendChild(welcomeTitleContainer)
+  welcomeContainer.appendChild(welcomeSubtitle)
+  /*End welcome message*/
+
+  window.addEventListener('df-chat-open-changed', (event) => {
+    if (event.detail.isOpen === true) {
+      console.log(event.detail.isOpen)
+      setTimeout(focusOnInput, 500)
+    }
+  });
+  function focusOnInput() {
+    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
+    console.log('klickad')
+  }
+
+  var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
+  var messageList = messageArea.shadowRoot.querySelector('.message-list-wrapper');
+  var messages = messageList.querySelector('#message-list .content');
+  var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
+  userInput.shadowRoot.appendChild(styleUserInput);
+
+  if (messages.firstChild) {
+    messages.insertBefore(welcomeContainer, messages.firstChild);
+  } else {
+    messages.appendChild(welcomeContainer);
+  }
+  document.body.appendChild(htmlMessageStyle);
+  messageArea.shadowRoot.appendChild(messageListStyle);
+
   checkElementsExist();
 
 
-window.addEventListener('df-request-sent', (event) => {
+  window.addEventListener('df-request-sent', (event) => {
     setTimeout(addUserUtteranceStyle, 100);
-});
+  });
 
-window.addEventListener('df-response-received', (event) => {
-  setTimeout(addBotUtteranceStyle, 100);
-});
+  window.addEventListener('df-response-received', (event) => {
+    setTimeout(addBotUtteranceStyle, 100);
+  });
 
 
-function addUserUtteranceStyle() {
+  function addUserUtteranceStyle() {
     var userUtterances = messageList.querySelectorAll('.content .user');
-    if(userUtterances){
-      var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true); 
+    if (userUtterances) {
+      var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true);
       var utterance;
-      if(userUtterances.length>0){
+      if (userUtterances.length > 0) {
         var lastUserUtterance = userUtterances[userUtterances.length - 1];
         utterance = lastUserUtterance.querySelector('df-messenger-utterance');
         utterance.shadowRoot.appendChild(userInnerMessageStyleClone);
-      }else{
+      } else {
         utterance = messageList.shadowRoot.querySelector('.content .user df-messenger-utterance');
         utterance.shadowRoot.appendChild(userInnerMessageStyleClone);
       }
@@ -312,10 +308,10 @@ function addUserUtteranceStyle() {
     var utterance = messageList.querySelector('.bot:last-child df-messenger-utterance');
     var botUtterance = utterance?.shadowRoot.querySelector("df-html-message");
     var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
-    var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);  
+    var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);
     botUtterance?.appendChild(htmlMessageStyleClone);
     botUtterance?.shadowRoot.appendChild(botInnerMessageStyleClone);
-    if(utterance.shadowRoot.querySelector('.message-stack.mid df-card')){
+    if (utterance.shadowRoot.querySelector('.message-stack.mid df-card')) {
       var handoverButton = utterance.shadowRoot.querySelector('.message-stack.mid df-card').shadowRoot.querySelector('df-button')
       var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
       handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
@@ -324,97 +320,97 @@ function addUserUtteranceStyle() {
     checkSources(botUtterance);
     checkIfBulletlist(botUtterance)
   }
-  function checkSources(botUtterance){
+  function checkSources(botUtterance) {
     var source1 = botUtterance?.shadowRoot?.querySelector('.bot-message p a')
     var source2 = botUtterance?.shadowRoot?.querySelector('.bot-message p:last-of-type a')
-    if(source1 && source1.innerText.includes('$sys.func.GET')){
-        let str = source1?.innerText;
-        let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
-        let obj = JSON.parse(jsonStr);
-        let title = obj.title;
+    if (source1 && source1.innerText.includes('$sys.func.GET')) {
+      let str = source1?.innerText;
+      let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
+      let obj = JSON.parse(jsonStr);
+      let title = obj.title;
 
-        source1.innerText = title;
-        source1.setAttribute('href', obj.uri)
-        source1.setAttribute('target', '_blank')
+      source1.innerText = title;
+      source1.setAttribute('href', obj.uri)
+      source1.setAttribute('target', '_blank')
 
-      }
-      if(source2?.innerText.includes('$sys.func.GET')){
-        let str = source2.innerText;
-        let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
-        let obj = JSON.parse(jsonStr);
-        let title = obj.title;
-
-        source2.innerText = title;
-        source2.setAttribute('href', obj.uri)
-        source2.setAttribute('target', '_blank')
-      }
-    if(source1?.innerText === source2?.innerText){
-        //var sourceStyleClone = sourceStyle.cloneNode(true);
-        //botUtterance?.shadowRoot.appendChild(sourceStyleClone);
-        source2?.remove();
     }
-    source1?.setAttribute("target","_blank");
-    source2?.setAttribute("target","_blank")
-    if(source1 && source1.href.includes('https://www.telia.se/produkt')){
+    if (source2?.innerText.includes('$sys.func.GET')) {
+      let str = source2.innerText;
+      let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
+      let obj = JSON.parse(jsonStr);
+      let title = obj.title;
+
+      source2.innerText = title;
+      source2.setAttribute('href', obj.uri)
+      source2.setAttribute('target', '_blank')
+    }
+    if (source1?.innerText === source2?.innerText) {
+      //var sourceStyleClone = sourceStyle.cloneNode(true);
+      //botUtterance?.shadowRoot.appendChild(sourceStyleClone);
+      source2?.remove();
+    }
+    source1?.setAttribute("target", "_blank");
+    source2?.setAttribute("target", "_blank")
+    if (source1 && source1.href.includes('https://www.telia.se/produkt')) {
       source2?.remove()
     }
   }
-  function addFeedbackStyle(utterance){
-    if(utterance.shadowRoot.querySelector('df-messenger-feedback')){
+  function addFeedbackStyle(utterance) {
+    if (utterance.shadowRoot.querySelector('df-messenger-feedback')) {
       var feedback = utterance.shadowRoot.querySelector('df-messenger-feedback');
       feedback.shadowRoot.querySelector('.feedback').appendChild(feedbackThumbsStyle);
     }
   }
-  function checkIfBulletlist(response){
+  function checkIfBulletlist(response) {
     console.log(response)
-      var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
-      var messageText = botMessage?.innerText
-      if(messageText && messageText?.includes('- **')){
-       messageText = messageText.replace(/-\s\*\*/g, '\n• ');
-       messageText = messageText.replace(/\*\*/g, ' ')
-       botMessage.innerText = messageText;
-      }
-  }
-function checkElementsExist() {
-  /*Applies styling to existing conversation after reload of page*/
-  allUserUtterances();
-  allBotUtterances();
-  checkAllSources();
-  checkCustomElement()
-}
-
-function allUserUtterances(){
-  console.log(messageList)
-  var userUtterances = messageList.querySelectorAll('.content .user');
-  userUtterances?.forEach(utterance => {
-    var userUtterance = utterance.querySelector('df-messenger-utterance');
-    var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true); 
-    userUtterance.shadowRoot.appendChild(userInnerMessageStyleClone);
-  });
-}
-
-function allBotUtterances(){
-  var botUtterances = messageList.querySelectorAll('.content .bot');
-  botUtterances?.forEach(utterance => {
-    var botUtterance = utterance.querySelector('df-messenger-utterance');
-    var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
-    var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);
-    botUtterance.shadowRoot.appendChild(htmlMessageStyleClone);
-    botUtterance?.shadowRoot.querySelector('df-html-message')?.shadowRoot.appendChild(botInnerMessageStyleClone);
-    if(botUtterance.shadowRoot.querySelector('.message-stack.mid df-card')){
-      var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button');
-      var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
-      handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+    var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
+    var messageText = botMessage?.innerText
+    if (messageText && messageText?.includes('- **')) {
+      messageText = messageText.replace(/-\s\*\*/g, '\n• ');
+      messageText = messageText.replace(/\*\*/g, ' ')
+      botMessage.innerText = messageText;
     }
-  });
-}
-function checkAllSources(){
+  }
+  function checkElementsExist() {
+    /*Applies styling to existing conversation after reload of page*/
+    allUserUtterances();
+    allBotUtterances();
+    checkAllSources();
+    checkCustomElement()
+  }
+
+  function allUserUtterances() {
+    console.log(messageList)
+    var userUtterances = messageList.querySelectorAll('.content .user');
+    userUtterances?.forEach(utterance => {
+      var userUtterance = utterance.querySelector('df-messenger-utterance');
+      var userInnerMessageStyleClone = userInnerMessageStyle.cloneNode(true);
+      userUtterance.shadowRoot.appendChild(userInnerMessageStyleClone);
+    });
+  }
+
+  function allBotUtterances() {
+    var botUtterances = messageList.querySelectorAll('.content .bot');
+    botUtterances?.forEach(utterance => {
+      var botUtterance = utterance.querySelector('df-messenger-utterance');
+      var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
+      var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);
+      botUtterance.shadowRoot.appendChild(htmlMessageStyleClone);
+      botUtterance?.shadowRoot.querySelector('df-html-message')?.shadowRoot.appendChild(botInnerMessageStyleClone);
+      if (botUtterance.shadowRoot.querySelector('.message-stack.mid df-card')) {
+        var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button');
+        var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
+        handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+      }
+    });
+  }
+  function checkAllSources() {
     var botUtterances = messageList?.shadowRoot?.querySelectorAll('.content .bot');
     botUtterances?.forEach(utterance => {
       var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-html-message");
       var source1 = botUtterance?.shadowRoot.querySelector('.bot-message p.df-source a')
       var source2 = botUtterance?.shadowRoot.querySelector('.bot-message p.df-source:last-of-type a')
-      if(source1?.innerText.includes('$sys.func.GET')){
+      if (source1?.innerText.includes('$sys.func.GET')) {
         let str = source1.innerText;
         let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
         let obj = JSON.parse(jsonStr);
@@ -425,7 +421,7 @@ function checkAllSources(){
         source1.setAttribute('target', '_blank')
 
       }
-      if(source2?.innerText.includes('$sys.func.GET')){
+      if (source2?.innerText.includes('$sys.func.GET')) {
         let str = source2.innerText;
         let jsonStr = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
         let obj = JSON.parse(jsonStr);
@@ -435,18 +431,18 @@ function checkAllSources(){
         source2.setAttribute('href', obj.uri)
         source2.setAttribute('target', '_blank')
       }
-      if(source1?.innerText === source2?.innerText){
-          var sourceStyleClone = sourceStyle.cloneNode(true);
-          botUtterance?.shadowRoot.appendChild(sourceStyleClone);
-      }  
+      if (source1?.innerText === source2?.innerText) {
+        var sourceStyleClone = sourceStyle.cloneNode(true);
+        botUtterance?.shadowRoot.appendChild(sourceStyleClone);
+      }
     });
   }
-  function checkCustomElement(){
+  function checkCustomElement() {
     var botUtterances = messageList?.shadowRoot?.querySelectorAll('.content .bot');
     botUtterances?.forEach(utterance => {
       var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-custom-template");
 
-      if(botUtterance){
+      if (botUtterance) {
         agentHandoverOffered = true
         var element;
         element = new CustomElementAgentHandover
@@ -460,14 +456,14 @@ function checkAllSources(){
       super();
       this.dfPayload = null;
       this.dfResponseId = null;
-      this.renderRoot = this.attachShadow({mode: 'open'});
+      this.renderRoot = this.attachShadow({ mode: 'open' });
     }
     connectedCallback() {
       var buttonStyle = document.createElement('style');
       var div = document.createElement('div');
       var button = document.createElement('button');
       var span = document.createElement('span');
-      
+
       div.setAttribute('class', 'agent-handover-container');
       button.setAttribute('class', 'handover-button');
       span.setAttribute('class', 'handover-text');
@@ -482,22 +478,22 @@ function checkAllSources(){
       `*/
       //button.innerText = this.dfPayload.text;
       span.innerText = "Kontakta en expert";
-      if(agentHandoverOffered === true){
+      if (agentHandoverOffered === true) {
         var botUtterances = messageList.shadowRoot.querySelectorAll('.content .bot df-messenger-utterance');
 
         botUtterances.forEach(utterance => {
           var customTemplate = utterance.shadowRoot.querySelector("df-custom-template");
-          if(customTemplate){
+          if (customTemplate) {
             var whisbi = customTemplate.querySelector('agent-handover-whisbi');
             button.appendChild(span);
             div.appendChild(button);
             div.appendChild(buttonStyle);
-            if(whisbi?.shadowRoot){
+            if (whisbi?.shadowRoot) {
               whisbi?.shadowRoot?.appendChild(div);
               customTemplate.shadowRoot.appendChild(whisbi);
             }
             console.log('I agent handover offered')
-            button.addEventListener("click",function openWhisbi() {
+            button.addEventListener("click", function openWhisbi() {
               const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
               window.dispatchEvent(openWhisbiEvent);
               const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
@@ -506,23 +502,23 @@ function checkAllSources(){
           }
 
         });
-      }else{
+      } else {
         console.log('openWhisbe button Created')
-          button.appendChild(span);
-          div.appendChild(button)
-          div.appendChild(buttonStyle)
-          this.renderRoot.appendChild(div);
-          button.addEventListener("click",function openWhisbi() {
-            const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
-            window.dispatchEvent(openWhisbiEvent);
-            const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
-            dfMessengerBubble.closeChat();
-          })
+        button.appendChild(span);
+        div.appendChild(button)
+        div.appendChild(buttonStyle)
+        this.renderRoot.appendChild(div);
+        button.addEventListener("click", function openWhisbi() {
+          const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
+          window.dispatchEvent(openWhisbiEvent);
+          const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
+          dfMessengerBubble.closeChat();
+        })
       }
     }
   }
 
-  (function() {
+  (function () {
     customElements.define('agent-handover-whisbi', CustomElementAgentHandover);
   })();
 });
