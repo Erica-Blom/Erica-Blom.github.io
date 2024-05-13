@@ -1,5 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
   console.log("CONTENT LOADED")
+
+  var screenWidth = window.innerWidth;
+  var screenHeight = window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
   var chat = trigger.shadowRoot.querySelector("df-messenger-chat");
   var userInput = chat.shadowRoot.querySelector("df-messenger-user-input");
@@ -223,8 +226,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   /*End custom style elements*/
 
-  var screenWidth = window.innerWidth;
-  var screenHeight = window.innerHeight;
+
 
   /*Welcome message*/
   var welcomeContainer = document.createElement('div');
