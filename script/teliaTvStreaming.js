@@ -109,12 +109,18 @@ window.addEventListener('DOMContentLoaded', () => {
   titlebarWrapperStyle.textContent = `
     .titlebar-wrapper{border-top-right-radius:0px !important;}
   `
+  var styleElement = null;
   var createStyleElement = (content) => {
     var style = document.createElement('style');
     style.innerText = content;
     return style;
   };
-
+  var updateStyles = () => {
+    if (styleElement) {
+      document.head.removeChild(styleElement);
+    }
+  screenWidth = window.innerWidth;
+  screenHeight = window.innerHeight;
   var commonStyles = `
   df-messenger {
     z-index: 999;
@@ -206,8 +212,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   `;
 /*--df-messenger-input-inner-padding:0px 40px 0px 0px;*/
-  document.head.appendChild(createStyleElement(commonStyles + (screenWidth <= 600 ? mobileStyles : desktopStyles)));
+styleElement =createStyleElement(commonStyles + (screenWidth <= 600 ? mobileStyles : desktopStyles))
+  document.head.appendChild(styleElement);
   trigger.shadowRoot.appendChild(chatbubbleStyle);
+};
+updateStyles();
+window.addEventListener('resize', updateStyles);
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
   if (screenWidth <= 600) {
     titlebarStyle.textContent = `
@@ -253,9 +263,15 @@ window.addEventListener('DOMContentLoaded', () => {
       console.log(event.detail.isOpen)
       setTimeout(focusOnInput, 500)
     }
+    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
+
+    })
   });
   function focusOnInput() {
    // userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
+   if(screenWidth <= 600){
+    screenHeight = window.innerHeight;
+  }
     console.log('klickad')
   }
 
