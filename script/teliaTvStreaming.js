@@ -258,7 +258,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
   function focusOnInput() {
-    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
+   // userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
     console.log('klickad')
   }
 
