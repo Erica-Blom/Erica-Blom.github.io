@@ -274,6 +274,13 @@ window.addEventListener('resize', updateStyles);
 
     })
   });
+  
+    document.addEventListener('df-messenger-loaded', () => {
+    const dfMessenger = document.querySelector('df-messenger');
+    const searchConfig = { ... }
+    dfMessenger.setQueryParameters(searchConfig);
+      console.log('searchConfig: ', searchConfig)
+  });
   function focusOnInput() {
    // userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
    if(screenWidth <= 600){
