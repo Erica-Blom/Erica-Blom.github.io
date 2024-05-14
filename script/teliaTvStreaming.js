@@ -5,7 +5,7 @@
       "searchConfig": {
         "boostSpecs": [
           {
-            "dataStores": [ "https://console.cloud.google.com/gen-app-builder/locations/eu/engines/streaming-tv_1713531738313/collections/default_collection/data-stores/telia-se-tv-products_1714122628586/data/documents?project=telia-se-digitalchannels" ],
+            "dataStores": [ "projects/telia-se-digitalchannels/locations/eu/collections/default_collection/data-stores/telia-se-tv-products" ],
             "spec": [
               {
                 "conditionBoostSpecs": {
