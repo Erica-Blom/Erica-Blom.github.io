@@ -156,6 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-input-padding: 0px;
     --df-messenger-input-font-size: 16px;
     --df-messenger-input-box-padding: 12px;
+    --df-messenger-input-background:green;
     --df-messenger-input-border-bottom:1px solid rgba(0, 0, 0, 0.44);
     --df-messenger-message-feedback-icon-font-color: #6D02A3;
     --df-messenger-message-feedback-icon-font-color-active:#29003E;
