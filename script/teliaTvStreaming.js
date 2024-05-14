@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
   var handoverButtonStyle = document.createElement('style');
   var titlebarStyle = document.createElement('style');
   var titlebarWrapperStyle = document.createElement('style');
-
+  var messageWrapperStyle = document.createElement('style');
   chatbubbleStyle.textContent = `
     .bubble{position:absolute !important; bottom:105px;right:900px}
     .container{position:relative}
@@ -72,13 +72,14 @@ window.addEventListener('DOMContentLoaded', () => {
     #send-icon-button #send-icon{display:none}
     #send-icon-button:before{display:contents;content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.02658 1.43248C1.20615 1.27832 1.45956 1.24412 1.67357 1.34516L14.6826 7.48697C14.8925 7.58608 15.0264 7.7974 15.0264 8.02954C15.0264 8.26169 14.8925 8.473 14.6826 8.57211L1.67356 14.7139C1.45955 14.8149 1.20614 14.7807 1.02658 14.6266C0.84701 14.4724 0.774836 14.2271 0.842308 14.0003L2.61825 8.02954L0.842307 2.05879C0.774836 1.83195 0.84701 1.58664 1.02658 1.43248ZM3.69174 8.62954L2.37525 13.0556L11.7502 8.62954H3.69174ZM11.7502 7.42954H3.69174L2.37525 3.00345L11.7502 7.42954Z' fill='white'/%3E%3C/svg%3E")}
     .send-icon-button-wrapper{background-color:#4E0174; border-top-right-radius:8px; border-bottom-right-radius:8px; min-height:48px; height:auto!important}
-    .input-container{padding:16px !important; border-bottom-right-radius:0px !important};
+    .input-container{padding:16px !important; border-bottom-right-radius:0px !important;position:fixed !important; bottom:0px;right:0px;width:-webkit-fill-available!important};
   `
   messageListStyle.textContent = `
     .df-welcome-container{margin:auto;text-align:center;color:rgba(0, 0, 0, 0.62)}
     .df-welcome-container .df-welcome-icon{background-color:rgba(0, 0, 0, 0.05);border-radius:50%;height:48px;width:48px;margin:auto;background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M10.4596 17.121L7.9441 16.0077L10.3908 14.9393C10.3908 14.9393 10.3909 14.9393 10.3909 14.9393C11.53 14.442 12.4431 13.5318 12.9407 12.3876C12.9407 12.3875 12.9408 12.3874 12.9408 12.3873L14.0023 9.95289L15.0642 12.3882C15.561 13.5277 16.4706 14.4415 17.6144 14.9396C17.6145 14.9396 17.6146 14.9397 17.6147 14.9397L20.0494 16.0026L17.6139 17.0659C17.6138 17.0659 17.6138 17.0659 17.6138 17.0659C16.475 17.563 15.562 18.473 15.0643 19.6168C15.0643 19.6169 15.0643 19.6169 15.0642 19.6169C15.0641 19.6173 15.064 19.6176 15.0638 19.6179L14.0088 22.0365L12.9985 19.6876C12.9984 19.6873 12.9983 19.687 12.9981 19.6868C12.5067 18.5409 11.5997 17.6247 10.4603 17.1213C10.4603 17.1213 10.4602 17.1212 10.4602 17.1212C10.46 17.1211 10.4598 17.121 10.4596 17.121Z' stroke='%23990AE3' stroke-width='2'/%3E%3Cpath d='M9.89047 6.83371L8.00695 6.01142C7.55143 5.81309 7.18864 5.44891 6.99044 4.99427L6.16865 3.1096C6.1049 2.96347 5.89742 2.96347 5.83367 3.1096L5.01188 4.99427C4.81368 5.45007 4.44972 5.81309 3.99536 6.01142L2.10953 6.83487C1.96349 6.89866 1.96349 7.10511 2.10953 7.1689L4.02782 8.01787C4.48218 8.21851 4.84381 8.58385 5.0397 9.04081L5.83483 10.8895C5.89742 11.0368 6.10606 11.0368 6.16981 10.8895L6.99044 9.00834C7.18864 8.55254 7.55259 8.18952 8.00695 7.99119L9.89047 7.1689C10.0365 7.10511 10.0365 6.8975 9.89047 6.83371Z' fill='%23990AE3'/%3E%3Cpath d='M13.9452 1.91686L13.0035 1.50571C12.7757 1.40655 12.5943 1.22446 12.4952 0.997137L12.0843 0.0548005C12.0524 -0.0182668 11.9487 -0.0182668 11.9168 0.0548005L11.5059 0.997137C11.4068 1.22504 11.2249 1.40655 10.9977 1.50571L10.0548 1.91744C9.98174 1.94933 9.98174 2.05255 10.0548 2.08445L11.0139 2.50893C11.2411 2.60926 11.4219 2.79193 11.5198 3.02041L11.9174 3.94476C11.9487 4.01841 12.053 4.01841 12.0849 3.94476L12.4952 3.00417C12.5943 2.77627 12.7763 2.59476 13.0035 2.4956L13.9452 2.08445C14.0183 2.05255 14.0183 1.94875 13.9452 1.91686Z' fill='%23990AE3'/%3E%3C/svg%3E");background-repeat:no-repeat; background-position:center center;}
     .df-welcome-title-container .df-welcome-title{font-size:20px;font-weight:700;text-align:center;line-height:25px;color:rgba(0, 0, 0, 0.8); margin-top:16px;margin-bottom:16px}
     .df-welcome-container .df-welcome-title-container .df-welcome-subtitle{color:rgba(0, 0, 0, 0.62) !important;font-size:14px;}
+    .message-list-wrapper{height:calc(100% - 80px) !important}
   `
   htmlMessageStyle.textContent = `
     df-html-message{width:calc(100% - 24px) !important;max-width:calc(100% - 24px) !important;}
@@ -109,6 +110,10 @@ window.addEventListener('DOMContentLoaded', () => {
   titlebarWrapperStyle.textContent = `
     .titlebar-wrapper{border-top-right-radius:0px !important;}
   `
+  messageWrapperStyle.textContent = `
+    df-messenger-message-list{display:block !important}
+  `
+  chat.shadowRoot.appendChild(messageWrapperStyle)
   var styleElement = null;
   var createStyleElement = (content) => {
     var style = document.createElement('style');
@@ -120,7 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
       document.head.removeChild(styleElement);
     }
   screenWidth = window.innerWidth;
-  screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  //screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var commonStyles = `
   df-messenger {
     z-index: 999;
@@ -138,7 +143,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-default-border:1px solid #FFFFFF;
     --df-messenger-chat-bubble-background: #FFFFFF;
     --df-messenger-chat-bubble-icon-size:40px;
-    --df-messenger-chat-window-height: ${screenHeight}px;
+    --df-messenger-chat-window-height: 100vh;
     --df-messenger-chat-background: #FFFFFF;
     --df-messenger-chat-scroll-button-display:block;
     --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
@@ -169,17 +174,17 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-message-user-writing-image-width:250px;
     --df-messenger-focus-color:#6D02A3;
     --df-messenger-titlebar-padding:5px 15px;
-              --df-messenger-titlebar-font-color:rgba(0, 0, 0, 0.8);
-              --df-messenger-titlebar-border-bottom:rgba(0, 0, 0, 0.1) 1px solid;
-              --df-messenger-citations-background:#F5F5FA;
-              --df-messenger-send-icon-offset-y:1px;
-              --df-messenger-card-background:#4E0174;
-              --df-messenger-button-border-radius:50px;
-              --df-messenger-button-font-color:#FFFFFF;
-              --df-messenger-button-text-align:center;
-              --df-messenger-button-font-size:16px;
-              --df-messenger-link-visited-font-color:#6D02A3;
-              --df-messenger-link-hover-font-color:#4E0174;
+    --df-messenger-titlebar-font-color:rgba(0, 0, 0, 0.8);
+    --df-messenger-titlebar-border-bottom:rgba(0, 0, 0, 0.1) 1px solid;
+    --df-messenger-citations-background:#F5F5FA;
+    --df-messenger-send-icon-offset-y:1px;
+    --df-messenger-card-background:#4E0174;
+    --df-messenger-button-border-radius:50px;
+    --df-messenger-button-font-color:#FFFFFF;
+    --df-messenger-button-text-align:center;
+    --df-messenger-button-font-size:16px;
+    --df-messenger-link-visited-font-color:#6D02A3;
+    --df-messenger-link-hover-font-color:#4E0174;
   }
   `;
 
