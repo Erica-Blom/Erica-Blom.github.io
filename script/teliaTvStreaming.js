@@ -319,7 +319,7 @@ window.addEventListener('resize', updateStyles);
               {
                 "conditionBoostSpecs": {
                   "condition": "uri: ANY(netflix)",
-                  "boost": "1.0"
+                  "boost": "-1.0"
                 }
               }
             ]
