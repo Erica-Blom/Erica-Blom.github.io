@@ -328,6 +328,7 @@ window.addEventListener('resize', updateStyles);
       }
     }
     dfMessenger.setQueryParameters(searchConfig);
+    console.log(searchConfig)
   });
 
   function addUserUtteranceStyle() {
