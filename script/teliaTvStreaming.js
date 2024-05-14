@@ -9,7 +9,7 @@
             "spec": [
               {
                 "conditionBoostSpecs": {
-                  "condition": "uri: ANY(netflix)",
+                  "condition": "uri: ANY\"netflix\"",
                   "boost": "-1.0"
                 }
               }
