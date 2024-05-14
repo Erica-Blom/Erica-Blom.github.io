@@ -1,3 +1,27 @@
+  document.addEventListener('df-messenger-loaded', () => {
+    console.log('messenger loaded')
+    const dfMessenger = document.querySelector('df-messenger');
+    const searchConfig = { 
+      "searchConfig": {
+        "boostSpecs": [
+          {
+            "dataStores": [ "https://console.cloud.google.com/gen-app-builder/locations/eu/engines/streaming-tv_1713531738313/collections/default_collection/data-stores/telia-se-tv-products_1714122628586/data/documents?project=telia-se-digitalchannels" ],
+            "spec": [
+              {
+                "conditionBoostSpecs": {
+                  "condition": "uri: ANY(netflix)",
+                  "boost": "-1.0"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+    dfMessenger.setQueryParameters(searchConfig);
+    console.log(searchConfig)
+  });
+
 window.addEventListener('DOMContentLoaded', () => {
   console.log("CONTENT LOADED")
 
@@ -308,28 +332,7 @@ window.addEventListener('resize', updateStyles);
   });
 
 
-  document.addEventListener('df-messenger-loaded', () => {
-    const dfMessenger = document.querySelector('df-messenger');
-    const searchConfig = { 
-      "searchConfig": {
-        "boostSpecs": [
-          {
-            "dataStores": [ "https://console.cloud.google.com/gen-app-builder/locations/eu/engines/streaming-tv_1713531738313/collections/default_collection/data-stores/telia-se-tv-products_1714122628586/data/documents?project=telia-se-digitalchannels" ],
-            "spec": [
-              {
-                "conditionBoostSpecs": {
-                  "condition": "uri: ANY(netflix)",
-                  "boost": "-1.0"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    }
-    dfMessenger.setQueryParameters(searchConfig);
-    console.log(searchConfig)
-  });
+
 
   function addUserUtteranceStyle() {
     var userUtterances = messageList.querySelectorAll('.content .user');
