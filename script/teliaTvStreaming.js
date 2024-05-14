@@ -133,6 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-font-family:Telia Sans;
   }
   df-messenger-chat-bubble {
+    --df-messenger-chat-bubble-background:transparent;
     --df-messenger-default-border-color:#FFFFFF;
     --df-messenger-default-border:1px solid #FFFFFF;
     --df-messenger-chat-bubble-background: #FFFFFF;
