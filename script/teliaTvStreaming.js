@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
   var messageWrapperStyle = document.createElement('style');
   chatbubbleStyle.textContent = `
     .bubble{position:absolute !important; bottom:105px;right:900px}
-    .container{position:relative}
+    .container{position:fixed !important; bottom:0px;right:0px }
     .chat-wrapper.expanded{position:fixed !important;bottom:0px !important; animation: .25s ease forwards slideInFromRight; border-top-right-radius:0px !important}
     .chat-wrapper.hidden{animation: 1s ease-out 0s 1 slideOutToRight;}
     
