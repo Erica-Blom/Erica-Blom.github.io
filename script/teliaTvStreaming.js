@@ -223,7 +223,7 @@ window.addEventListener('DOMContentLoaded', () => {
   trigger.shadowRoot.appendChild(chatbubbleStyle);
 };
 updateStyles();
-window.addEventListener('resize', updateStyles);
+//window.addEventListener('resize', updateStyles);
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
   if (screenWidth <= 600) {
     titlebarStyle.textContent = `
