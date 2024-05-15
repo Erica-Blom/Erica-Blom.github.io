@@ -272,7 +272,7 @@ updateStyles();
     }
     //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
 
-    })
+    //})
   });
   function focusOnInput() {
    // userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
