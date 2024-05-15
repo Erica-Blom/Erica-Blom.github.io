@@ -1,26 +1,27 @@
-  document.addEventListener('df-messenger-loaded', () => {
-    console.log('messenger loaded')
-    const dfMessenger = document.querySelector('df-messenger');
-    const searchConfig = { 
-      "searchConfig": {
-        "boostSpecs": [
-          {
-            "dataStores": [ "projects/telia-se-digitalchannels/locations/eu/collections/default_collection/data-stores/telia-se-tv-products" ],
-            "spec": [
-              {
-                "conditionBoostSpecs": {
-                  "condition": "uri: ANY\"netflix\"",
-                  "boost": "-1.0"
-                }
-              }
-            ]
-          }
-        ]
+document.addEventListener('df-messenger-loaded', () => {
+  console.log('messenger loaded')
+  const dfMessenger = document.querySelector('df-messenger');
+  const searchConfig = { 
+  "searchConfig": {
+    "boostSpecs": [
+      {
+        "conditionBoostSpecs": {
+          "condition": {
+            "stringCondition": {
+            "field": "url",
+            "value": "netflix",
+            "type": "CONTAINS"
+            }
+          },
+          "boost": -1.0
+        }
       }
-    }
-    dfMessenger.setQueryParameters(searchConfig);
-    console.log(searchConfig)
-  });
+    ]
+  }
+  }
+  dfMessenger.setQueryParameters(searchConfig);
+  console.log(searchConfig)
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   console.log("CONTENT LOADED")
