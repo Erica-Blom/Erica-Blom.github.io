@@ -196,7 +196,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const mobileStyles = `
     df-messenger-titlebar{
       position:fixed !important;
-      top:0;left:0;
+      top:0;
+      left:0;
       width:100%;
       z-index:2
     }
