@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
       document.head.removeChild(styleElement);
     }
   screenWidth = window.innerWidth;
-  //screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var commonStyles = `
   df-messenger {
     z-index: 999;
@@ -148,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-default-border:1px solid #FFFFFF;
     --df-messenger-chat-bubble-background: #FFFFFF;
     --df-messenger-chat-bubble-icon-size:40px;
-    --df-messenger-chat-window-height: 100vh;
+    --df-messenger-chat-window-height: ${screenHeight}px;
     --df-messenger-chat-background: #FFFFFF;
     --df-messenger-chat-scroll-button-display:block;
     --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
@@ -194,13 +194,6 @@ window.addEventListener('DOMContentLoaded', () => {
   `;
 
   const mobileStyles = `
-    df-messenger-titlebar{
-      position:fixed !important;
-      top:0;
-      left:0;
-      width:100%;
-      z-index:2
-    }
     df-messenger {
       --df-messenger-internal-chat-bubble-size-offset: 0px;
     }
@@ -225,7 +218,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   `;
 /*--df-messenger-input-inner-padding:0px 40px 0px 0px;*/
-styleElement =createStyleElement(commonStyles + (screenWidth <= 600 ? mobileStyles : desktopStyles))
+  styleElement =createStyleElement(commonStyles + (screenWidth <= 600 ? mobileStyles : desktopStyles))
   document.head.appendChild(styleElement);
   trigger.shadowRoot.appendChild(chatbubbleStyle);
 };
