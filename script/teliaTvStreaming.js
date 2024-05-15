@@ -1,4 +1,5 @@
 
+
 window.addEventListener('DOMContentLoaded', () => {
   console.log("CONTENT LOADED")
 
@@ -73,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
     #send-icon-button #send-icon{display:none}
     #send-icon-button:before{display:contents;content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.02658 1.43248C1.20615 1.27832 1.45956 1.24412 1.67357 1.34516L14.6826 7.48697C14.8925 7.58608 15.0264 7.7974 15.0264 8.02954C15.0264 8.26169 14.8925 8.473 14.6826 8.57211L1.67356 14.7139C1.45955 14.8149 1.20614 14.7807 1.02658 14.6266C0.84701 14.4724 0.774836 14.2271 0.842308 14.0003L2.61825 8.02954L0.842307 2.05879C0.774836 1.83195 0.84701 1.58664 1.02658 1.43248ZM3.69174 8.62954L2.37525 13.0556L11.7502 8.62954H3.69174ZM11.7502 7.42954H3.69174L2.37525 3.00345L11.7502 7.42954Z' fill='white'/%3E%3C/svg%3E")}
     .send-icon-button-wrapper{background-color:#4E0174; border-top-right-radius:8px; border-bottom-right-radius:8px; min-height:48px; height:auto!important}
-    .input-container{padding:16px !important; border-left:1px solid rgba(0, 0, 0, 0.1) !important; border-bottom-right-radius:0px !important;position:fixed !important; bottom:0px;right:0px;width:-webkit-fill-available!important};
+    .input-container{padding:16px !important; border-left:1px solid rgba(0, 0, 0, 0.1) !important; border-bottom-right-radius:0px !important; bottom:0px;right:0px;width:-webkit-fill-available!important};
   `
   messageListStyle.textContent = `
     .df-welcome-container{margin:auto;text-align:center;color:rgba(0, 0, 0, 0.62)}
@@ -308,9 +309,6 @@ window.addEventListener('resize', updateStyles);
     setTimeout(addBotUtteranceStyle, 100);
   });
 
-
-
-
   function addUserUtteranceStyle() {
     var userUtterances = messageList.querySelectorAll('.content .user');
     if (userUtterances) {
@@ -395,6 +393,10 @@ window.addEventListener('resize', updateStyles);
       messageText = messageText.replace(/\*\*/g, ' ')
       botMessage.innerText = messageText;
     }
+    else if(messageText && messageText?.includes('**')){
+      messageText = messageText.replace(/\*\*/g, '\n• ')
+      botMessage.innerText = messageText;
+    }
   }
   function checkElementsExist() {
     /*Applies styling to existing conversation after reload of page*/
@@ -429,6 +431,7 @@ window.addEventListener('resize', updateStyles);
       }
     });
   }
+
   function checkAllSources() {
     var botUtterances = messageList?.shadowRoot?.querySelectorAll('.content .bot');
     botUtterances?.forEach(utterance => {
