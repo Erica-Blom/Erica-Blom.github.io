@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
       document.head.removeChild(styleElement);
     }
   screenWidth = window.innerWidth;
-  screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  //screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var commonStyles = `
   df-messenger {
     z-index: 999;
@@ -138,9 +138,9 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-chat-background: #FFFFFF;
     --df-messenger-chat-padding:20px;
     --df-messenger-font-family:Telia Sans;
-    bottom:0;
-    right:0;
-    top:0;
+    bottom:0px;
+    top:0px;
+    right:0px
   }
   df-messenger-chat-bubble {
     --df-messenger-chat-bubble-background:transparent;
@@ -148,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-default-border:1px solid #FFFFFF;
     --df-messenger-chat-bubble-background: #FFFFFF;
     --df-messenger-chat-bubble-icon-size:40px;
-    --df-messenger-chat-window-height: ${screenHeight};
+    --df-messenger-chat-window-height: 100vh;
     --df-messenger-chat-background: #FFFFFF;
     --df-messenger-chat-scroll-button-display:block;
     --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
@@ -195,6 +195,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const mobileStyles = `
     df-messenger-titlebar{
+      position:fixed !important;
+      top:0;left:0;
       width:100%;
       z-index:2
     }
@@ -309,6 +311,8 @@ window.addEventListener('resize', updateStyles);
   window.addEventListener('df-response-received', (event) => {
     setTimeout(addBotUtteranceStyle, 100);
   });
+
+
 
 
   function addUserUtteranceStyle() {
