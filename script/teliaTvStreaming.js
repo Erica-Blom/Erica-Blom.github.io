@@ -267,9 +267,10 @@ updateStyles();
   window.addEventListener('df-chat-open-changed', (event) => {
     if (event.detail.isOpen === true) {
       console.log(event.detail.isOpen)
-      setTimeout(focusOnInput, 500)
+      userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus()
+      //setTimeout(focusOnInput, 500)
     }
-    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
+    //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
 
     })
   });
