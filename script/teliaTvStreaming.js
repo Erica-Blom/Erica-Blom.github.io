@@ -291,7 +291,7 @@ window.addEventListener('resize', updateStyles);
   }
   function clickTMP(){
     console.log('klickad2', userInput.shadowRoot.querySelector('.tmpInput'))
-    userInput.shadowRoot.querySelector('.tmpInput').click();
+    userInput.shadowRoot.querySelector('.tmpInput').focus();
     console.log('klickad3')
   }
 
