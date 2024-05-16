@@ -67,6 +67,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   styleUserInput.textContent = `
     .input-box-wrapper{background-color:#FFFFFF !important;align-items:normal !important}
+
+    .tmpInput{background-color:green; position:relative}
     .input-wrapper{border:1px solid rgba(0, 0, 0, 0.44); border-radius:4px 8px 8px 4px}
     #send-icon-button{background-color:#4E0174 !important;padding:14px !important}
     #send-icon-button:active{background-color:#8C07D0 !important}
