@@ -278,14 +278,21 @@ window.addEventListener('resize', updateStyles);
   function focusOnInput() {
     var tmpInput = document.createElement('input')
     tmpInput.setAttribute('class','tmpInput')
+    console.log('klickad')
     userInput.shadowRoot.appendChild(tmpInput)
-    userInput.shadowRoot.querySelector('.tmpInput').click();
+    setTimeout(clickTMP,5000)
+    
    //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
    //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
    /*if(screenWidth <= 600){
     screenHeight = window.innerHeight;*/
   //}
-    console.log('klickad')
+    
+  }
+  function clickTMP(){
+    console.log('klickad2', userInput.shadowRoot.querySelector('.tmpInput'))
+    userInput.shadowRoot.querySelector('.tmpInput').click();
+    console.log('klickad3')
   }
 
   var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
