@@ -69,9 +69,9 @@ window.addEventListener('DOMContentLoaded', () => {
   styleUserInput.textContent = `
     .input-box-wrapper{background-color:#FFFFFF !important;align-items:normal !important}
 
-    .tmpInput{background-color:green; position:relative}
+    .tmpInput{background-color:blue; position:relative}
     .input-wrapper{border:1px solid rgba(0, 0, 0, 0.44); border-radius:4px 8px 8px 4px}
-    #send-icon-button{background-color:#4E0174 !important;padding:14px !important}
+    #send-icon-button{background-color:#4E0174 !important;padding:14px !important; border-radius:8px}
     #send-icon-button:active{background-color:#8C07D0 !important}
     #send-icon-button:hover{background-color:#6D02A3 !important; cursor:pointer}
     #send-icon-button #send-icon{display:none}
@@ -230,7 +230,8 @@ window.addEventListener('DOMContentLoaded', () => {
 };
 updateStyles();
 window.addEventListener('resize', function checkHeight(){
-  if(screenHeight > 600){
+  var height = window.visualViewport ? window.visualViewport.height : window.innerHeight
+  if(height > 600){
     updateStyles
   }
 });
@@ -280,27 +281,19 @@ window.addEventListener('resize', function checkHeight(){
       console.log(event.detail.isOpen)
       setTimeout(focusOnInput, 500)
     }
-    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
-
-    })
   });
   function focusOnInput() {
+    //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
+   //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
     var tmpInput = document.createElement('input')
     tmpInput.setAttribute('class','tmpInput')
     console.log('klickad')
     userInput.shadowRoot.appendChild(tmpInput)
-    setTimeout(clickTMP,5000)
-    
-   //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
-   //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
-   /*if(screenWidth <= 600){
-    screenHeight = window.innerHeight;*/
-  //}
-    
+    setTimeout(clickTMP,100)
   }
   function clickTMP(){
     console.log('klickad2', userInput.shadowRoot.querySelector('.tmpInput'))
-    userInput.shadowRoot.querySelector('.tmpInput').focus();
+    userInput.shadowRoot.querySelector('.tmpInput').click();
     console.log('klickad3')
   }
 
