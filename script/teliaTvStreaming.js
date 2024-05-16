@@ -113,7 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
     #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
   `
   titlebarWrapperStyle.textContent = `
-    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important}
+    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important; top:0}
   `
   titlebar.textContent = `
     df-messenger-titlebar{position:sticky !important; top:0}
