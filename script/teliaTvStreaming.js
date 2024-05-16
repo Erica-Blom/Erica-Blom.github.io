@@ -356,7 +356,6 @@ window.addEventListener('resize', updateStyles);
     }
     addFeedbackStyle(utterance);
     checkSources(botUtterance);
-    checkIfBulletlist(botUtterance)
   }
   function checkSources(botUtterance) {
     var source1 = botUtterance?.shadowRoot?.querySelector('.bot-message p a')
@@ -398,26 +397,6 @@ window.addEventListener('resize', updateStyles);
       var feedback = utterance.shadowRoot.querySelector('df-messenger-feedback');
       feedback.shadowRoot.querySelector('.feedback').appendChild(feedbackThumbsStyle);
     }
-  }
-  function checkIfBulletlist(response) {
-    console.log(response)
-    var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
-    var messageText = botMessage?.innerText
-    if(messageText && messageText?.includes('  ')){
-      messageText = messageText.replace(/  /g, '\n')
-      botMessage.innerText = messageText;
-    }
-    if (messageText && messageText?.includes('- **')) {
-      messageText = messageText.replace(/-\s\*\*/g, '\n• ');
-      messageText = messageText.replace(/\*\*/g, ' ')
-      messageText = messageText
-      botMessage.innerText = messageText;
-    }
-    else if(messageText && messageText?.includes('**')){
-      messageText = messageText.replace(/\*\*/g, '\n• ')
-      botMessage.innerText = messageText;
-    }
-
   }
   function checkElementsExist() {
     /*Applies styling to existing conversation after reload of page*/
