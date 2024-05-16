@@ -33,6 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
   var handoverButtonStyle = document.createElement('style');
   var titlebarStyle = document.createElement('style');
   var titlebarWrapperStyle = document.createElement('style');
+  var titlebar = document.createElement('style');
   var messageWrapperStyle = document.createElement('style');
   chatbubbleStyle.textContent = `
     .bubble{position:absolute !important; bottom:105px;right:900px}
@@ -68,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
   styleUserInput.textContent = `
     .input-box-wrapper{background-color:#FFFFFF !important;align-items:normal !important}
 
-    .tmpInput{background-color:yellow; position:relative}
+    .tmpInput{background-color:green; position:relative}
     .input-wrapper{border:1px solid rgba(0, 0, 0, 0.44); border-radius:4px 8px 8px 4px}
     #send-icon-button{background-color:#4E0174 !important;padding:14px !important}
     #send-icon-button:active{background-color:#8C07D0 !important}
@@ -112,7 +113,10 @@ window.addEventListener('DOMContentLoaded', () => {
     #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
   `
   titlebarWrapperStyle.textContent = `
-    .titlebar-wrapper{border-top-right-radius:0px !important;}
+    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important}
+  `
+  titlebar.textContent = `
+    df-messenger-titlebar{position:sticky !important}
   `
   messageWrapperStyle.textContent = `
     df-messenger-message-list{display:block !important}
@@ -227,6 +231,7 @@ window.addEventListener('DOMContentLoaded', () => {
 updateStyles();
 window.addEventListener('resize', updateStyles);
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
+  chat.appendChild(titlebar)
   if (screenWidth <= 600) {
     titlebarStyle.textContent = `
       df-messenger-titlebar{
@@ -292,7 +297,6 @@ window.addEventListener('resize', updateStyles);
   function clickTMP(){
     console.log('klickad2', userInput.shadowRoot.querySelector('.tmpInput'))
     userInput.shadowRoot.querySelector('.tmpInput').focus();
-    userInput.shadowRoot.querySelector('.tmpInput').click();
     console.log('klickad3')
   }
 
@@ -356,6 +360,7 @@ window.addEventListener('resize', updateStyles);
     }
     addFeedbackStyle(utterance);
     checkSources(botUtterance);
+    checkIfBulletlist(botUtterance)
   }
   function checkSources(botUtterance) {
     var source1 = botUtterance?.shadowRoot?.querySelector('.bot-message p a')
@@ -397,6 +402,10 @@ window.addEventListener('resize', updateStyles);
       var feedback = utterance.shadowRoot.querySelector('df-messenger-feedback');
       feedback.shadowRoot.querySelector('.feedback').appendChild(feedbackThumbsStyle);
     }
+  }
+  function checkIfBulletlist(response) {
+
+
   }
   function checkElementsExist() {
     /*Applies styling to existing conversation after reload of page*/
