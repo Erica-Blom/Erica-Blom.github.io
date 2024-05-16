@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
   styleUserInput.textContent = `
     .input-box-wrapper{background-color:#FFFFFF !important;align-items:normal !important}
 
-    .tmpInput{background-color:green; position:relative}
+    .tmpInput{background-color:pink; position:relative}
     .input-wrapper{border:1px solid rgba(0, 0, 0, 0.44); border-radius:4px 8px 8px 4px}
     #send-icon-button{background-color:#4E0174 !important;padding:14px !important}
     #send-icon-button:active{background-color:#8C07D0 !important}
@@ -113,7 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
     #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
   `
   titlebarWrapperStyle.textContent = `
-    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important}
+    .titlebar-wrapper{border-top-right-radius:0px !important; position:fixed!important; top:0}
   `
   titlebar.textContent = `
     df-messenger-titlebar{position:sticky !important}
