@@ -274,8 +274,12 @@ window.addEventListener('resize', updateStyles);
     })
   });
   function focusOnInput() {
-   userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
-   userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
+    var tmpInput = document.createElement('input')
+    tmpInput.setAttribute('class','tmpInput')
+    userInput.shadowRoot.appendChild(tmpInput)
+    userInput.shadowRoot.querySelector('.tmpInput').click();
+   //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
+   //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
    /*if(screenWidth <= 600){
     screenHeight = window.innerHeight;*/
   //}
