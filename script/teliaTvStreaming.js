@@ -223,7 +223,7 @@ window.addEventListener('DOMContentLoaded', () => {
   trigger.shadowRoot.appendChild(chatbubbleStyle);
 };
 updateStyles();
-//window.addEventListener('resize', updateStyles);
+window.addEventListener('resize', updateStyles);
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
   if (screenWidth <= 600) {
     titlebarStyle.textContent = `
@@ -267,18 +267,18 @@ updateStyles();
   window.addEventListener('df-chat-open-changed', (event) => {
     if (event.detail.isOpen === true) {
       console.log(event.detail.isOpen)
-      userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus()
-      //setTimeout(focusOnInput, 500)
+      setTimeout(focusOnInput, 500)
     }
-    //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
+    userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').addEventListener("click",function inputClicked(){
 
-    //})
+    })
   });
   function focusOnInput() {
-   // userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').click();
-   if(screenWidth <= 600){
-    screenHeight = window.innerHeight;
-  }
+   userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
+   userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
+   /*if(screenWidth <= 600){
+    screenHeight = window.innerHeight;*/
+  //}
     console.log('klickad')
   }
 
@@ -389,15 +389,21 @@ updateStyles();
     console.log(response)
     var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
     var messageText = botMessage?.innerText
+    if(messageText && messageText?.includes('  ')){
+      messageText = messageText.replace(/  /g, '\n')
+      botMessage.innerText = messageText;
+    }
     if (messageText && messageText?.includes('- **')) {
       messageText = messageText.replace(/-\s\*\*/g, '\n• ');
       messageText = messageText.replace(/\*\*/g, ' ')
+      messageText = messageText
       botMessage.innerText = messageText;
     }
     else if(messageText && messageText?.includes('**')){
       messageText = messageText.replace(/\*\*/g, '\n• ')
       botMessage.innerText = messageText;
     }
+
   }
   function checkElementsExist() {
     /*Applies styling to existing conversation after reload of page*/
