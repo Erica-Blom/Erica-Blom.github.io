@@ -232,7 +232,7 @@ updateStyles();
 window.addEventListener('resize', function checkHeight(){
   var height = window.visualViewport ? window.visualViewport.height : window.innerHeight
   if(height > 600){
-    updateStyles
+    updateStyles()
   }
 });
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
