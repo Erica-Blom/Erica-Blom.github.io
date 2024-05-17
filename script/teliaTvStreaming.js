@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
   styleUserInput.textContent = `
     .input-box-wrapper{background-color:#FFFFFF !important;align-items:normal !important}
 
-    .tmpInput{background-color:blue; position:relative}
+    .tmpInput{background-color:green; position:relative}
     .input-wrapper{border:1px solid rgba(0, 0, 0, 0.44); border-radius:4px 8px 8px 4px}
     #send-icon-button{background-color:#4E0174 !important;padding:14px !important; border-radius:8px}
     #send-icon-button:active{background-color:#8C07D0 !important}
@@ -85,6 +85,25 @@ window.addEventListener('DOMContentLoaded', () => {
     .df-welcome-title-container .df-welcome-title{font-size:20px;font-weight:700;text-align:center;line-height:25px;color:rgba(0, 0, 0, 0.8); margin-top:16px;margin-bottom:16px}
     .df-welcome-container .df-welcome-title-container .df-welcome-subtitle{color:rgba(0, 0, 0, 0.62) !important;font-size:14px;}
     .message-list-wrapper{height:calc(100% - 80px) !important}
+    .scroll-to-bottom-button{width:36px;height:36px}
+    .scroll-to-bottom-button:before {content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.99994 13.9333C7.84081 13.9333 7.68819 13.8701 7.57567 13.7576L3.909 10.0909C3.67469 9.85663 3.67469 9.47673 3.90901 9.24242C4.14332 9.0081 4.52322 9.0081 4.75753 9.24242L7.39994 11.8848L7.39994 2.66668C7.39994 2.33531 7.66857 2.06668 7.99994 2.06668C8.33131 2.06668 8.59994 2.33531 8.59994 2.66668L8.59994 11.8848L11.2423 9.24242C11.4767 9.0081 11.8566 9.0081 12.0909 9.24242C12.3252 9.47673 12.3252 9.85663 12.0909 10.0909L8.4242 13.7576C8.31168 13.8701 8.15906 13.9333 7.99994 13.9333Z' fill='white'/%3E%3C/svg%3E")}
+    .scroll-to-bottom-button .icon{display:none!important}
+    ::-webkit-scrollbar {width: 10px;}
+    
+    ::-webkit-scrollbar-track {
+    background-color: #fff;
+      border: none;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #C6C6CD;
+      border-radius:16px;
+      width:8px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+
   `
   htmlMessageStyle.textContent = `
     df-html-message{width:calc(100% - 24px) !important;max-width:calc(100% - 24px) !important;}
@@ -113,7 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
     #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
   `
   titlebarWrapperStyle.textContent = `
-    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important; top:0}
+    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important}
   `
   titlebar.textContent = `
     df-messenger-titlebar{position:sticky !important; top:0}
@@ -158,7 +177,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-chat-background: #FFFFFF;
     --df-messenger-chat-scroll-button-display:block;
     --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
-    --df-messenger-chat-scroll-button-padding:16px;
+    --df-messenger-chat-scroll-button-padding:7.5px;
     --df-messenger-chat-scroll-button-text-display:none;
     --df-messenger-message-bot-background: #F5F5FA;
     --df-messenger-message-bot-font-color: rgba(0, 0, 0, 0.8);
@@ -196,6 +215,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-button-font-size:16px;
     --df-messenger-link-visited-font-color:#6D02A3;
     --df-messenger-link-hover-font-color:#4E0174;
+    --df-messenger-link-font-color:#6D02A3;
   }
   `;
 
@@ -240,7 +260,7 @@ window.addEventListener('resize', function checkHeight(){
   if (screenWidth <= 600) {
     titlebarStyle.textContent = `
       df-messenger-titlebar{
-        position:fixed !important;
+        position:sticky!important;
         top:0;
         left:0;
         width:100%;
@@ -406,10 +426,22 @@ window.addEventListener('resize', function checkHeight(){
     var messageText = botMessage?.innerText
 
     if(messageText && messageText?.includes(' * ')){
-      console.log('* found')
       messageText = messageText.replace(/ \* /g, "\n•")
       botMessage.innerText = messageText;
     }
+    if(messageText && messageText?.includes('- **')){
+      messageText = messageText.replace(/- \*\*/g, "\n•")
+      botMessage.innerText = messageText;
+    }
+    if(messageText && messageText?.includes('**')){
+      messageText = messageText.replace(/\*\*/g, ' ');
+      botMessage.innerText = messageText;
+    }
+    if(messageText && messageText?.includes(' - ')){
+      messageText = messageText.replace(/^- /gm, "\n•");
+      botMessage.innerText = messageText;
+    }
+    
 
   }
   function checkElementsExist() {
@@ -446,7 +478,7 @@ window.addEventListener('resize', function checkHeight(){
     });
   }
   function checkAllSources() {
-    var botUtterances = messageList?.shadowRoot?.querySelectorAll('.content .bot');
+    var botUtterances = messageList?.querySelectorAll('.content .bot');
     botUtterances?.forEach(utterance => {
       var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-html-message");
       var source1 = botUtterance?.shadowRoot.querySelector('.bot-message p.df-source a')
@@ -473,24 +505,9 @@ window.addEventListener('resize', function checkHeight(){
         source2.setAttribute('target', '_blank')
       }
       if (source1?.innerText === source2?.innerText) {
-        var sourceStyleClone = sourceStyle.cloneNode(true);
-        botUtterance?.shadowRoot.appendChild(sourceStyleClone);
+        source2?.remove();
       }
     });
-  }
-  function checkCustomElement() {
-    var botUtterances = messageList?.shadowRoot?.querySelectorAll('.content .bot');
-    botUtterances?.forEach(utterance => {
-      var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-custom-template");
-
-      if (botUtterance) {
-        agentHandoverOffered = true
-        var element;
-        element = new CustomElementAgentHandover
-        botUtterance.appendChild(element)
-      }
-    })
-    agentHandoverOffered = false;
   }
   class CustomElementAgentHandover extends HTMLElement {
     constructor() {
@@ -520,7 +537,7 @@ window.addEventListener('resize', function checkHeight(){
       //button.innerText = this.dfPayload.text;
       span.innerText = "Kontakta en expert";
       if (agentHandoverOffered === true) {
-        var botUtterances = messageList.shadowRoot.querySelectorAll('.content .bot df-messenger-utterance');
+        var botUtterances = messageList.querySelectorAll('.content .bot df-messenger-utterance');
 
         botUtterances.forEach(utterance => {
           var customTemplate = utterance.shadowRoot.querySelector("df-custom-template");
@@ -558,8 +575,90 @@ window.addEventListener('resize', function checkHeight(){
       }
     }
   }
-
+  function checkCustomElement() {
+    var botUtterances = messageList?.querySelectorAll('.content .bot');
+    console.log('messageList',messageList)
+    console.log(botUtterances)
+    botUtterances?.forEach(utterance => {
+      var botUtterance = utterance.querySelector('df-messenger-utterance').shadowRoot.querySelector("df-custom-template");
+      console.log(utterance.querySelector('df-messenger-utterance'))
+      console.log('botUTterance',botUtterance)
+      if (botUtterance) {
+        agentHandoverOffered = true
+        var element;
+        element = new CustomElementAgentHandover
+        botUtterance.shadowRoot.appendChild(element)
+      }
+    })
+    agentHandoverOffered = false;
+  }
   (function () {
     customElements.define('agent-handover-whisbi', CustomElementAgentHandover);
   })();
 });
+class CustomElementAgentHandover extends HTMLElement {
+  constructor() {
+    super();
+    this.dfPayload = null;
+    this.dfResponseId = null;
+    this.renderRoot = this.attachShadow({ mode: 'open' });
+  }
+  connectedCallback() {
+    var buttonStyle = document.createElement('style');
+    var div = document.createElement('div');
+    var button = document.createElement('button');
+    var span = document.createElement('span');
+
+    div.setAttribute('class', 'agent-handover-container');
+    button.setAttribute('class', 'handover-button');
+    span.setAttribute('class', 'handover-text');
+    buttonStyle.innerText = `
+      .handover-button{background-color:#4E0174; color:#FFFFFF;font-size:16px;border-radius:50px;padding:16px;font-weight:500;border:none;width:100%;font-family:"Telia Sans";cursor:pointer}
+      .handover-button:hover{background-color:#6D02A3 !important}
+      .handover-text:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.41675 2.33337C1.41675 1.64302 1.97639 1.08337 2.66675 1.08337H8.00008C8.60482 1.08337 9.10926 1.51281 9.22508 2.08337H13.6667C14.3571 2.08337 14.9167 2.64302 14.9167 3.33337V5.00004C14.9167 5.6904 14.3571 6.25004 13.6667 6.25004H12.575L11.4126 7.41252C11.1848 7.64033 10.8154 7.64033 10.5876 7.41252C10.3598 7.18471 10.3598 6.81537 10.5876 6.58756L11.9209 5.25423C12.0303 5.14483 12.1787 5.08337 12.3334 5.08337H13.6667C13.7128 5.08337 13.7501 5.04606 13.7501 5.00004V3.33337C13.7501 3.28735 13.7128 3.25004 13.6667 3.25004H9.25008V5.00004C9.25008 5.04606 9.28739 5.08337 9.33341 5.08337H10.0001C10.3222 5.08337 10.5834 5.34454 10.5834 5.66671C10.5834 5.98887 10.3222 6.25004 10.0001 6.25004H9.33341C8.72867 6.25004 8.22424 5.8206 8.10842 5.25004H6.66675C6.34458 5.25004 6.08341 4.98887 6.08341 4.66671C6.08341 4.34454 6.34458 4.08337 6.66675 4.08337H8.08341V2.33337C8.08341 2.28735 8.04611 2.25004 8.00008 2.25004H2.66675C2.62072 2.25004 2.58341 2.28735 2.58341 2.33337V4.00004C2.58341 4.04606 2.62072 4.08337 2.66675 4.08337H4.33341C4.48812 4.08337 4.6365 4.14483 4.74589 4.25423L6.74589 6.25423C6.9737 6.48203 6.9737 6.85138 6.74589 7.07919C6.51809 7.30699 6.14874 7.30699 5.92094 7.07919L4.09179 5.25004H2.66675C1.97639 5.25004 1.41675 4.6904 1.41675 4.00004V2.33337ZM5.00008 8.91671C4.35505 8.91671 3.82048 9.44768 3.82048 10.1172C3.82048 10.4386 3.94378 10.7284 4.14446 10.9435C4.36096 11.1756 4.6644 11.3176 5.00008 11.3176C5.33577 11.3176 5.6392 11.1756 5.85571 10.9435C6.05639 10.7284 6.17969 10.4386 6.17969 10.1172C6.17969 9.44768 5.64511 8.91671 5.00008 8.91671ZM2.65381 10.1172C2.65381 8.81632 3.69783 7.75004 5.00008 7.75004C6.30234 7.75004 7.34635 8.81632 7.34635 10.1172C7.34635 10.4313 7.28549 10.7317 7.17496 11.0065C7.41958 11.1116 7.70136 11.2688 7.92012 11.5003C7.94746 11.5293 7.97414 11.559 8.00012 11.5896C8.10873 11.4615 8.22663 11.3519 8.34849 11.2587C8.50436 11.1395 8.66389 11.0492 8.81502 10.9808C8.71094 10.7129 8.65381 10.4215 8.65381 10.1172C8.65381 8.81632 9.69783 7.75004 11.0001 7.75004C12.3023 7.75004 13.3464 8.81632 13.3464 10.1172C13.3464 10.4313 13.2855 10.7317 13.175 11.0065C13.4196 11.1116 13.7014 11.2688 13.9201 11.5003C14.4603 12.072 14.7416 12.9688 14.49 14.2863C14.4185 14.661 14.09 14.9167 13.7255 14.9167H8.27467C8.1788 14.9167 8.08615 14.8991 8.00023 14.8667C7.91376 14.8992 7.82087 14.9167 7.7255 14.9167H2.27467C1.90314 14.9167 1.57989 14.6523 1.50973 14.2842C1.36451 13.5222 1.39521 12.8965 1.56138 12.386C1.72947 11.8695 2.02502 11.506 2.34849 11.2587C2.50436 11.1395 2.66389 11.0492 2.81502 10.9808C2.71094 10.7129 2.65381 10.4215 2.65381 10.1172ZM3.52948 11.9617C3.38707 11.9985 3.21342 12.0659 3.05722 12.1854C2.90606 12.301 2.7599 12.4732 2.67077 12.747C2.59611 12.9764 2.5544 13.2996 2.60689 13.75H7.39339C7.40818 13.6238 7.41562 13.5073 7.4169 13.3998C7.41671 13.3775 7.41671 13.3555 7.4169 13.3335C7.41022 12.7738 7.23202 12.4708 7.0721 12.3016C6.97326 12.197 6.77994 12.0945 6.55067 12.0155C6.51431 12.003 6.47906 11.9917 6.44565 11.9817C6.04804 12.2957 5.546 12.4843 5.00008 12.4843C4.44265 12.4843 3.93095 12.2877 3.52948 11.9617ZM8.60689 13.75H13.3934C13.491 12.9163 13.2679 12.5088 13.0721 12.3016C12.9733 12.197 12.7799 12.0945 12.5507 12.0155C12.5143 12.003 12.4791 11.9917 12.4457 11.9817C12.048 12.2957 11.546 12.4843 11.0001 12.4843C10.4426 12.4843 9.93095 12.2877 9.52948 11.9617C9.38707 11.9985 9.21342 12.0659 9.05722 12.1854C8.90606 12.301 8.7599 12.4732 8.67077 12.747C8.59611 12.9764 8.5544 13.2996 8.60689 13.75ZM11.0001 8.91671C10.355 8.91671 9.82048 9.44768 9.82048 10.1172C9.82048 10.4386 9.94378 10.7284 10.1445 10.9435C10.361 11.1756 10.6644 11.3176 11.0001 11.3176C11.3358 11.3176 11.6392 11.1756 11.8557 10.9435C12.0564 10.7284 12.1797 10.4386 12.1797 10.1172C12.1797 9.44768 11.6451 8.91671 11.0001 8.91671Z' fill='white'/%3E%3C/svg%3E");margin-right:8px}
+    `
+    /* buttonStyle.innerText = `
+      .handover-button{background-color:${this.dfPayload.backgroundColor}; color:${this.dfPayload.color};font-size:${this.dfPayload.fontSize};border-radius:${this.dfPayload.radius};padding:${this.dfPayload.padding};font-weight:${this.dfPayload.fontWeight};border:${this.dfPayload.border};width:${this.dfPayload.width};font-family:${this.dfPayload.fontFamily};cursor:pointer}
+      .handover-icon{content:${this.dfPayload.iconURI}}
+    `*/
+    //button.innerText = this.dfPayload.text;
+    span.innerText = "Kontakta en expert";
+    if (agentHandoverOffered === true) {
+      var botUtterances = messageList.querySelectorAll('.content .bot df-messenger-utterance');
+
+      botUtterances.forEach(utterance => {
+        var customTemplate = utterance.shadowRoot.querySelector("df-custom-template");
+        if (customTemplate) {
+          var whisbi = customTemplate.querySelector('agent-handover-whisbi');
+          button.appendChild(span);
+          div.appendChild(button);
+          div.appendChild(buttonStyle);
+          if (whisbi?.shadowRoot) {
+            whisbi?.shadowRoot?.appendChild(div);
+            customTemplate.shadowRoot.appendChild(whisbi);
+          }
+          console.log('I agent handover offered')
+          button.addEventListener("click", function openWhisbi() {
+            const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
+            window.dispatchEvent(openWhisbiEvent);
+            const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
+            dfMessengerBubble.closeChat();
+          })
+        }
+
+      });
+    } else {
+      console.log('openWhisbe button Created')
+      button.appendChild(span);
+      div.appendChild(button)
+      div.appendChild(buttonStyle)
+      this.renderRoot.appendChild(div);
+      button.addEventListener("click", function openWhisbi() {
+        const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
+        window.dispatchEvent(openWhisbiEvent);
+        const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
+        dfMessengerBubble.closeChat();
+      })
+    }
+  }
+}
