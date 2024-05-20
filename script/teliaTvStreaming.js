@@ -68,8 +68,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   styleUserInput.textContent = `
     .input-box-wrapper{background-color:#FFFFFF !important;align-items:normal !important}
-
-    .tmpInput{background-color:green; position:relative}
     .input-wrapper{border:1px solid rgba(0, 0, 0, 0.44); border-radius:4px 8px 8px 4px}
     #send-icon-button{background-color:#4E0174 !important;padding:14px !important; border-radius:8px}
     #send-icon-button:active{background-color:#8C07D0 !important}
@@ -122,7 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
   `
   feedbackThumbsStyle.textContent = `
     .feedback .thumb:hover{fill:#4E0174};
-    .feedback-box{display:none !important}
+    .feedback .feedback-box{display:none !important}
   `
   sourceStyle.textContent = `
     .bot-message .df-source:last-of-type a{display:none !important}
@@ -187,6 +185,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-message-user-font-color: rgba(0, 0, 0, 0.8);
     --df-messenger-message-user-font-weight: 400;
     --df-messenger-message-border-radius: 8px;
+    --df-messenger-message-spacing:16px;
     --df-messenger-send-icon-color: #FFFFFF;
     --df-messenger-send-icon-color-disabled:#FFFFFF;
     --df-messenger-input-padding: 0px;
@@ -296,27 +295,6 @@ window.addEventListener('resize', function checkHeight(){
   welcomeContainer.appendChild(welcomeSubtitle)
   /*End welcome message*/
 
-  window.addEventListener('df-chat-open-changed', (event) => {
-    if (event.detail.isOpen === true) {
-      console.log(event.detail.isOpen)
-      setTimeout(focusOnInput, 500)
-    }
-  });
-  function focusOnInput() {
-    //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').focus();
-   //userInput.shadowRoot.querySelector('.input-content-wrapper textarea.input-box').setSelectionRange(0,0)
-    var tmpInput = document.createElement('input')
-    tmpInput.setAttribute('class','tmpInput')
-    console.log('klickad')
-    userInput.shadowRoot.appendChild(tmpInput)
-    setTimeout(clickTMP,100)
-  }
-  function clickTMP(){
-    console.log('klickad2', userInput.shadowRoot.querySelector('.tmpInput'))
-    userInput.shadowRoot.querySelector('.tmpInput').click();
-    console.log('klickad3')
-  }
-
   var messageArea = chat.shadowRoot.querySelector('.message-list-wrapper df-messenger-message-list');
   var messageList = messageArea.shadowRoot.querySelector('.message-list-wrapper');
   var messages = messageList.querySelector('#message-list .content');
@@ -342,8 +320,10 @@ window.addEventListener('resize', function checkHeight(){
     setTimeout(addBotUtteranceStyle, 100);
   });
 
-
-
+  window.addEventListener('df-feedback-request-sent', (event) => {
+    console.log('click-event: ', event)
+    setTimeout(addFeedbackStyle,100);
+  });
 
   function addUserUtteranceStyle() {
     var userUtterances = messageList.querySelectorAll('.content .user');
@@ -375,7 +355,7 @@ window.addEventListener('resize', function checkHeight(){
       var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
       handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
     }
-    addFeedbackStyle(utterance);
+    //addFeedbackStyle(utterance);
     checkSources(botUtterance);
     checkIfBulletlist(botUtterance)
   }
@@ -414,32 +394,45 @@ window.addEventListener('resize', function checkHeight(){
       source2?.remove()
     }
   }
-  function addFeedbackStyle(utterance) {
+  function addFeedbackStyle() {
+    var utterance = messageList.querySelector('.bot:last-child df-messenger-utterance');
+    console.log("utterance", utterance)
     if (utterance.shadowRoot.querySelector('df-messenger-feedback')) {
       var feedback = utterance.shadowRoot.querySelector('df-messenger-feedback');
-      feedback.shadowRoot.querySelector('.feedback').appendChild(feedbackThumbsStyle);
+      var feedbackStyleClone = feedbackThumbsStyle.cloneNode(true);
+      feedback.shadowRoot.appendChild(feedbackStyleClone)
+      feedback.shadowRoot.querySelector('.feedback .feedback-box').setAttribute('style','display:none')
+      console.log(feedback.shadowRoot.querySelector('.feedback .feedback-box'))
     }
   }
   function checkIfBulletlist(response) {
     console.log(response)
     var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
     var messageText = botMessage?.innerText
-
-    if(messageText && messageText?.includes(' * ')){
-      messageText = messageText.replace(/ \* /g, "\n•")
-      botMessage.innerText = messageText;
-    }
     if(messageText && messageText?.includes('- **')){
-      messageText = messageText.replace(/- \*\*/g, "\n•")
-      botMessage.innerText = messageText;
+      console.log('includes - **')
+    
+      /*let isFirst = true;
+      messageText = messageText.replace(/- /g, function() {
+        console.log('isFirst 1', isFirst)
+        if (isFirst) {
+          isFirst = false;
+          return "<br>&nbsp;• ";
+        } else {
+          return "<br><br>&nbsp;• ";
+        }
+      });*/
+      messageText = messageText.replace(/- /g,"<br><br>&nbsp;• ");
+      messageText = messageText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+      botMessage.innerHTML = messageText;
     }
-    if(messageText && messageText?.includes('**')){
-      messageText = messageText.replace(/\*\*/g, ' ');
-      botMessage.innerText = messageText;
-    }
-    if(messageText && messageText?.includes(' - ')){
-      messageText = messageText.replace(/^- /gm, "\n•");
-      botMessage.innerText = messageText;
+    
+
+    if(messageText && messageText?.includes('** *')){
+      console.log('inludes ** *')
+      messageText = messageText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+      messageText = messageText.replace(/\*(.*?)\*/g, "<br>\t• ");
+      botMessage.innerHTML = messageText;
     }
     
 
