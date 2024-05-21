@@ -322,7 +322,7 @@ window.addEventListener('resize', function checkHeight(){
 
   window.addEventListener('df-feedback-request-sent', (event) => {
     console.log('click-event: ', event)
-    setTimeout(addFeedbackStyle,100);
+    //setTimeout(addFeedbackStyle,100);
   });
 
   function addUserUtteranceStyle() {
