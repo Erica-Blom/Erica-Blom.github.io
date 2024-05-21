@@ -322,7 +322,7 @@ window.addEventListener('resize', function checkHeight(){
 
   window.addEventListener('df-feedback-request-sent', (event) => {
     console.log('click-event: ', event)
-    //setTimeout(addFeedbackStyle,100);
+    setTimeout(addFeedbackStyle,100);
   });
 
   function addUserUtteranceStyle() {
@@ -409,29 +409,16 @@ window.addEventListener('resize', function checkHeight(){
     console.log(response)
     var botMessage = response?.shadowRoot.querySelector('.bot-message span span')
     var messageText = botMessage?.innerText
-    if(messageText && messageText?.includes('- **')){
-      console.log('includes - **')
-    
-      /*let isFirst = true;
-      messageText = messageText.replace(/- /g, function() {
-        console.log('isFirst 1', isFirst)
-        if (isFirst) {
-          isFirst = false;
-          return "<br>&nbsp;• ";
-        } else {
-          return "<br><br>&nbsp;• ";
-        }
-      });*/
-      messageText = messageText.replace(/- /g,"<br><br>&nbsp;• ");
+
+    if(messageText && messageText?.includes('**')){
+      console.log('innehåller **')
       messageText = messageText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+      messageText = messageText.replace(/\*/g, "<br><br>• ");
       botMessage.innerHTML = messageText;
     }
-    
-
-    if(messageText && messageText?.includes('** *')){
-      console.log('inludes ** *')
-      messageText = messageText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-      messageText = messageText.replace(/\*(.*?)\*/g, "<br>\t• ");
+    if(messageText && messageText?.includes('*')){
+      console.log('innehåller *')
+      messageText = messageText.replace(/\*/g, "<br><br>• ");
       botMessage.innerHTML = messageText;
     }
     
