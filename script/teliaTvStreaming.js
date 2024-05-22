@@ -120,7 +120,6 @@ window.addEventListener('DOMContentLoaded', () => {
   `
   feedbackThumbsStyle.textContent = `
     .feedback .thumb:hover{fill:#4E0174};
-    .feedback .feedback-box{display:none !important}
   `
   sourceStyle.textContent = `
     .bot-message .df-source:last-of-type a{display:none !important}
