@@ -120,7 +120,10 @@ window.addEventListener('DOMContentLoaded', () => {
   `
   feedbackThumbsStyle.textContent = `
     .feedback .thumb:hover{fill:#4E0174};
-  `
+    .feedback .feedback-box{display:none !important}
+    .feedback .thumbs-up:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.62531 1.41948C8.17472 1.05178 7.57916 0.977804 6.91524 1.07265C6.71328 1.1015 6.53981 1.231 6.45474 1.41643L4.23047 6.26482H2.00019C1.66882 6.26482 1.40019 6.53344 1.40019 6.8648L1.40006 13.9999C1.40006 14.1591 1.46327 14.3117 1.57579 14.4242C1.68832 14.5367 1.84093 14.5999 2.00006 14.5999L10.928 14.6C11.8368 14.6 12.6216 13.9671 12.8159 13.0802L13.8661 8.286C14.1301 7.08049 13.2125 5.93843 11.9776 5.93843H9.28253C9.29143 5.61601 9.30585 5.30177 9.31995 4.99464C9.32688 4.84355 9.33374 4.69417 9.33982 4.54639C9.36506 3.93301 9.37798 3.3313 9.30605 2.81967C9.23494 2.31378 9.06602 1.77911 8.62531 1.41948ZM5.21533 6.99588L7.39957 2.23477C7.67649 2.23259 7.80455 2.29855 7.86662 2.34921C7.95847 2.42416 8.06212 2.59111 8.11774 2.98673C8.17255 3.37661 8.16638 3.87631 8.14083 4.49705C8.13521 4.63375 8.12868 4.77579 8.12195 4.92226C8.09901 5.42139 8.0737 5.97201 8.0737 6.53843C8.0737 6.8698 8.34233 7.13843 8.6737 7.13843H11.9776C12.4455 7.13843 12.7941 7.57148 12.6939 8.02923L11.6437 12.8234C11.5699 13.1604 11.2721 13.4 10.928 13.4L2.60007 13.3999L2.60018 7.46482H4.01533V12.054C4.01533 12.3854 4.28396 12.654 4.61533 12.654C4.9467 12.654 5.21533 12.3854 5.21533 12.054V6.99588Z' fill='%236D02A3'/%3E%3C/svg%3E");}
+    .feedback .thumbs-down:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.00945 14.2153C7.46005 14.583 8.05561 14.657 8.71953 14.5622C8.92149 14.5333 9.09496 14.4038 9.18002 14.2184L11.4043 9.37001L13.6346 9.37001C13.9659 9.37001 14.2346 9.10139 14.2346 8.77002L14.2347 1.63489C14.2347 1.47576 14.1715 1.32315 14.059 1.21062C13.9465 1.0981 13.7938 1.03488 13.6347 1.03488L4.70673 1.03487C3.79793 1.03487 3.01313 1.66776 2.81886 2.55462L1.76869 7.34883C1.50462 8.55434 2.42232 9.69639 3.65712 9.69639L6.35224 9.69639C6.34333 10.0188 6.32891 10.3331 6.31482 10.6402C6.30788 10.7913 6.30103 10.9407 6.29495 11.0884C6.26971 11.7018 6.25679 12.3035 6.32871 12.8152C6.39983 13.321 6.56875 13.8557 7.00945 14.2153ZM10.4194 8.63895L8.2352 13.4001C7.95828 13.4022 7.83022 13.3363 7.76814 13.2856C7.67629 13.2107 7.57264 13.0437 7.51703 12.6481C7.46222 12.2582 7.46839 11.7585 7.49393 11.1378C7.49956 11.0011 7.50609 10.859 7.51282 10.7126C7.53576 10.2134 7.56106 9.66282 7.56106 9.09639C7.56106 8.76502 7.29244 8.4964 6.96106 8.4964L3.65712 8.49639C3.18924 8.49639 2.84062 8.06335 2.94089 7.6056L3.99107 2.8114C4.06489 2.47439 4.36263 2.23487 4.70673 2.23487L13.0347 2.23488L13.0346 8.17001L11.6194 8.17001L11.6194 3.58082C11.6194 3.24945 11.3508 2.98082 11.0194 2.98082C10.6881 2.98082 10.4194 3.24945 10.4194 3.58082L10.4194 8.63895Z' fill='%236D02A3'/%3E%3C/svg%3E");}
+    `
   sourceStyle.textContent = `
     .bot-message .df-source:last-of-type a{display:none !important}
   `
@@ -206,9 +209,10 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-titlebar-border-bottom:rgba(0, 0, 0, 0.1) 1px solid;
     --df-messenger-citations-background:#F5F5FA;
     --df-messenger-send-icon-offset-y:1px;
-    --df-messenger-card-background:#4E0174;
+    --df-messenger-card-background:#ffffff;
     --df-messenger-button-border-radius:50px;
-    --df-messenger-button-font-color:#FFFFFF;
+    --df-messenger-button-border: 1px solid #6D02A3;
+    --df-messenger-button-font-color:#6D02A3;
     --df-messenger-button-text-align:center;
     --df-messenger-button-font-size:16px;
     --df-messenger-link-visited-font-color:#6D02A3;
@@ -286,7 +290,7 @@ window.addEventListener('resize', function checkHeight(){
 
   var welcomeSubtitle = document.createElement('span');
   welcomeSubtitle.setAttribute('class', 'df-welcome-subtitle');
-  welcomeSubtitle.innerText = "Tänk på att inte dela dina personuppgifter när du använder vår AI.";
+  welcomeSubtitle.innerText = "Jag är en AI-chatt och kan ta fel ibland. Dela inte personliga uppgifter här.";
 
   welcomeContainer.appendChild(welcomeIcon)
   welcomeTitleContainer.appendChild(welcomeTitle)
@@ -316,12 +320,14 @@ window.addEventListener('resize', function checkHeight(){
   });
 
   window.addEventListener('df-response-received', (event) => {
+    setTimeout(() => checkIfWhisbi(event), 100);
     setTimeout(addBotUtteranceStyle, 100);
-  });
+});
+
 
   window.addEventListener('df-feedback-request-sent', (event) => {
     console.log('click-event: ', event)
-    setTimeout(addFeedbackStyle,100);
+   // setTimeout(addFeedbackStyle,100);
   });
 
   function addUserUtteranceStyle() {
@@ -383,8 +389,6 @@ window.addEventListener('resize', function checkHeight(){
       source2.setAttribute('target', '_blank')
     }
     if (source1?.innerText === source2?.innerText) {
-      //var sourceStyleClone = sourceStyle.cloneNode(true);
-      //botUtterance?.shadowRoot.appendChild(sourceStyleClone);
       source2?.remove();
     }
     source1?.setAttribute("target", "_blank");
@@ -400,6 +404,8 @@ window.addEventListener('resize', function checkHeight(){
       var feedback = utterance.shadowRoot.querySelector('df-messenger-feedback');
       var feedbackStyleClone = feedbackThumbsStyle.cloneNode(true);
       feedback.shadowRoot.appendChild(feedbackStyleClone)
+      feedback.shadowRoot.querySelector('.feedback .feedback-box').setAttribute('style','display:none')
+      console.log(feedback.shadowRoot.querySelector('.feedback .feedback-box'))
     }
   }
   function checkIfBulletlist(response) {
@@ -418,16 +424,25 @@ window.addEventListener('resize', function checkHeight(){
       messageText = messageText.replace(/\*/g, "<br><br>• ");
       botMessage.innerHTML = messageText;
     }
+  }
+  function checkIfWhisbi(response){
+    console.log("checkIfWhisbiResponse", response);
+    console.log("checkIfWhisbiResponse 2", response.detail.raw);
     
-
+    if(response.detail.raw?.queryResult?.triggerEvent === "triggerWhisbi"){
+      const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
+      window.dispatchEvent(openWhisbiEvent);
+      const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
+      dfMessengerBubble.closeChat();
+    }
   }
   function checkElementsExist() {
     /*Applies styling to existing conversation after reload of page*/
     allUserUtterances();
     allBotUtterances();
     checkAllSources();
+    checkCustomElement();
     checkAllBulletlists();
-    checkCustomElement()
   }
 
   function allUserUtterances() {
@@ -452,22 +467,6 @@ window.addEventListener('resize', function checkHeight(){
         var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button');
         var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
         handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
-      }
-    });
-  }
-    function checkAllBulletlists(){
-    var utterance = messageList.querySelectorAll('.bot df-messenger-utterance');
-    utterance.forEach(botUtterance => {
-      var botMessage = botUtterance.shadowRoot?.querySelector('df-html-message').shadowRoot.querySelector('.bot-message .answer')
-      var answer = botMessage.innerText
-      if(answer && answer?.includes('**')){
-        answer = answer.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-        answer = answer.replace(/\*/g, "<br><br>• ");
-        botMessage.innerHTML = answer;
-      }
-      if(answer && answer?.includes('*')){
-        answer = answer.replace(/\*/g, "<br><br>• ");
-        botMessage.innerHTML = answer;
       }
     });
   }
@@ -500,6 +499,22 @@ window.addEventListener('resize', function checkHeight(){
       }
       if (source1?.innerText === source2?.innerText) {
         source2?.remove();
+      }
+    });
+  }
+  function checkAllBulletlists(){
+    var utterance = messageList.querySelectorAll('.bot df-messenger-utterance');
+    utterance.forEach(botUtterance => {
+      var botMessage = botUtterance.shadowRoot?.querySelector('df-html-message').shadowRoot.querySelector('.bot-message .answer')
+      var answer = botMessage.innerText
+      if(answer && answer?.includes('**')){
+        answer = answer.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+        answer = answer.replace(/\*/g, "<br><br>• ");
+        botMessage.innerHTML = answer;
+      }
+      if(answer && answer?.includes('*')){
+        answer = answer.replace(/\*/g, "<br><br>• ");
+        botMessage.innerHTML = answer;
       }
     });
   }
