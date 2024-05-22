@@ -426,6 +426,7 @@ window.addEventListener('resize', function checkHeight(){
     allUserUtterances();
     allBotUtterances();
     checkAllSources();
+    checkAllBulletlists();
     checkCustomElement()
   }
 
@@ -451,6 +452,22 @@ window.addEventListener('resize', function checkHeight(){
         var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button');
         var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
         handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+      }
+    });
+  }
+    function checkAllBulletlists(){
+    var utterance = messageList.querySelectorAll('.bot df-messenger-utterance');
+    utterance.forEach(botUtterance => {
+      var botMessage = botUtterance.shadowRoot?.querySelector('df-html-message').shadowRoot.querySelector('.bot-message .answer')
+      var answer = botMessage.innerText
+      if(answer && answer?.includes('**')){
+        answer = answer.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+        answer = answer.replace(/\*/g, "<br><br>• ");
+        botMessage.innerHTML = answer;
+      }
+      if(answer && answer?.includes('*')){
+        answer = answer.replace(/\*/g, "<br><br>• ");
+        botMessage.innerHTML = answer;
       }
     });
   }
