@@ -400,8 +400,6 @@ window.addEventListener('resize', function checkHeight(){
       var feedback = utterance.shadowRoot.querySelector('df-messenger-feedback');
       var feedbackStyleClone = feedbackThumbsStyle.cloneNode(true);
       feedback.shadowRoot.appendChild(feedbackStyleClone)
-      feedback.shadowRoot.querySelector('.feedback .feedback-box').setAttribute('style','display:none')
-      console.log(feedback.shadowRoot.querySelector('.feedback .feedback-box'))
     }
   }
   function checkIfBulletlist(response) {
