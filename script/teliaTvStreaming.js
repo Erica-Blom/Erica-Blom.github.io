@@ -105,7 +105,8 @@ window.addEventListener('DOMContentLoaded', () => {
   `
   htmlMessageStyle.textContent = `
     df-html-message{width:calc(100% - 24px) !important;max-width:calc(100% - 24px) !important;}
-    .message-stack.mid df-card.mid{width:100%}
+    .message-stack df-card{width:100%}
+    
   `
   botInnerMessageStyle.textContent = `
     .bot-message .source-header{font-weight:500 !important; font-size:14px !important; line-height:14px !important;margin-top:16px;margin-bottom:8px}
@@ -119,7 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
     df-text-message{width:calc(100% - 25px) !important; max-width:calc(100% - 25px) !important}
   `
   feedbackThumbsStyle.textContent = `
-    .feedback .thumb:hover{fill:#4E0174};
+    .feedback .thumb:hover{fill:#4E0174}
     .feedback .feedback-box{display:none !important}
     .feedback .thumbs-up:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.62531 1.41948C8.17472 1.05178 7.57916 0.977804 6.91524 1.07265C6.71328 1.1015 6.53981 1.231 6.45474 1.41643L4.23047 6.26482H2.00019C1.66882 6.26482 1.40019 6.53344 1.40019 6.8648L1.40006 13.9999C1.40006 14.1591 1.46327 14.3117 1.57579 14.4242C1.68832 14.5367 1.84093 14.5999 2.00006 14.5999L10.928 14.6C11.8368 14.6 12.6216 13.9671 12.8159 13.0802L13.8661 8.286C14.1301 7.08049 13.2125 5.93843 11.9776 5.93843H9.28253C9.29143 5.61601 9.30585 5.30177 9.31995 4.99464C9.32688 4.84355 9.33374 4.69417 9.33982 4.54639C9.36506 3.93301 9.37798 3.3313 9.30605 2.81967C9.23494 2.31378 9.06602 1.77911 8.62531 1.41948ZM5.21533 6.99588L7.39957 2.23477C7.67649 2.23259 7.80455 2.29855 7.86662 2.34921C7.95847 2.42416 8.06212 2.59111 8.11774 2.98673C8.17255 3.37661 8.16638 3.87631 8.14083 4.49705C8.13521 4.63375 8.12868 4.77579 8.12195 4.92226C8.09901 5.42139 8.0737 5.97201 8.0737 6.53843C8.0737 6.8698 8.34233 7.13843 8.6737 7.13843H11.9776C12.4455 7.13843 12.7941 7.57148 12.6939 8.02923L11.6437 12.8234C11.5699 13.1604 11.2721 13.4 10.928 13.4L2.60007 13.3999L2.60018 7.46482H4.01533V12.054C4.01533 12.3854 4.28396 12.654 4.61533 12.654C4.9467 12.654 5.21533 12.3854 5.21533 12.054V6.99588Z' fill='%236D02A3'/%3E%3C/svg%3E");}
     .feedback .thumbs-down:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.00945 14.2153C7.46005 14.583 8.05561 14.657 8.71953 14.5622C8.92149 14.5333 9.09496 14.4038 9.18002 14.2184L11.4043 9.37001L13.6346 9.37001C13.9659 9.37001 14.2346 9.10139 14.2346 8.77002L14.2347 1.63489C14.2347 1.47576 14.1715 1.32315 14.059 1.21062C13.9465 1.0981 13.7938 1.03488 13.6347 1.03488L4.70673 1.03487C3.79793 1.03487 3.01313 1.66776 2.81886 2.55462L1.76869 7.34883C1.50462 8.55434 2.42232 9.69639 3.65712 9.69639L6.35224 9.69639C6.34333 10.0188 6.32891 10.3331 6.31482 10.6402C6.30788 10.7913 6.30103 10.9407 6.29495 11.0884C6.26971 11.7018 6.25679 12.3035 6.32871 12.8152C6.39983 13.321 6.56875 13.8557 7.00945 14.2153ZM10.4194 8.63895L8.2352 13.4001C7.95828 13.4022 7.83022 13.3363 7.76814 13.2856C7.67629 13.2107 7.57264 13.0437 7.51703 12.6481C7.46222 12.2582 7.46839 11.7585 7.49393 11.1378C7.49956 11.0011 7.50609 10.859 7.51282 10.7126C7.53576 10.2134 7.56106 9.66282 7.56106 9.09639C7.56106 8.76502 7.29244 8.4964 6.96106 8.4964L3.65712 8.49639C3.18924 8.49639 2.84062 8.06335 2.94089 7.6056L3.99107 2.8114C4.06489 2.47439 4.36263 2.23487 4.70673 2.23487L13.0347 2.23488L13.0346 8.17001L11.6194 8.17001L11.6194 3.58082C11.6194 3.24945 11.3508 2.98082 11.0194 2.98082C10.6881 2.98082 10.4194 3.24945 10.4194 3.58082L10.4194 8.63895Z' fill='%236D02A3'/%3E%3C/svg%3E");}
@@ -128,8 +129,15 @@ window.addEventListener('DOMContentLoaded', () => {
     .bot-message .df-source:last-of-type a{display:none !important}
   `
   handoverButtonStyle.textContent = `
-    #dfButtonWrapper{justify-content:center};
-    #dfButtonWrapper .text.word-wrap{font-weight:500 !important}
+    #dfButtonWrapper{justify-content:center;background-color:#4E0174 !important;color:#fff !important}
+    #dfButtonWrapper::hover{background-color:#6D02A3; color:#FFF !important}
+    #dfButtonWrapper .text.word-wrap{font-weight:500 !important;padding-left:16px !important}
+    #dfButtonWrapper #materialButtonIcon{display:none !important}
+    #dfButtonAnchorWrapper #materialButtonIcon{display:none !important}
+    #dfButtonAnchorWrapper {justify-content:center}
+    #dfButtonAnchorWrapper .text.word-wrap{font-weight:500 !important;padding-left:16px !important}
+    #dfButtonAnchorWrapper .df-button-icon:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.56085 1.48547C4.06021 1.07064 4.7143 1.19914 5.09733 1.58217L6.95285 3.43769C7.44751 3.93235 7.44752 4.73436 6.95285 5.22902L5.89566 6.28621C5.86963 6.31225 5.86963 6.35446 5.89566 6.38049L9.61952 10.1044C9.64555 10.1304 9.68776 10.1304 9.7138 10.1044L10.771 9.04716C11.2657 8.5525 12.0677 8.5525 12.5623 9.04716L14.8956 11.3805C15.1238 11.6086 15.3605 12.0629 15.1024 12.5421C14.8711 12.9718 14.3202 13.6188 12.9995 14.4992C11.8323 15.2774 10.5546 15.3452 9.46777 15.1013C8.39453 14.8606 7.45821 14.3069 6.90899 13.7575C6.67471 13.5232 6.67478 13.1433 6.90913 12.909C7.14348 12.6747 7.52338 12.6748 7.75766 12.9092C8.13936 13.291 8.86973 13.7374 9.73045 13.9304C10.5776 14.1205 11.5011 14.056 12.3338 13.5008C13.3227 12.8416 13.7588 12.3811 13.9458 12.1277L11.7138 9.89569C11.6878 9.86966 11.6456 9.86966 11.6195 9.89569L10.5623 10.9529C10.0677 11.4475 9.26565 11.4475 8.77099 10.9529L5.04713 7.22902C4.55247 6.73436 4.55247 5.93235 5.04713 5.43769L6.10432 4.38049C6.13036 4.35446 6.13036 4.31225 6.10432 4.28621L4.27285 2.45474C3.97448 2.71014 3.48374 3.18906 2.80186 4.04149C2.21687 4.77278 2.04146 5.42841 2.05042 6.00872C2.05967 6.60749 2.26603 7.18046 2.53858 7.73559C2.69831 8.06092 3.02736 8.45471 3.57296 8.98856C3.94694 9.35449 4.39088 9.7568 4.90727 10.2248C5.13696 10.4329 5.38099 10.6541 5.63957 10.8908C5.884 11.1145 5.90075 11.4941 5.677 11.7385C5.45325 11.9829 5.07372 11.9997 4.8293 11.7759C4.58462 11.5519 4.34824 11.3377 4.12208 11.1327C3.59574 10.6557 3.1248 10.2289 2.73372 9.84627C2.17987 9.30436 1.71873 8.78856 1.4614 8.26445C1.1574 7.64526 0.863814 6.88489 0.850564 6.02725C0.83703 5.15114 1.11656 4.22726 1.86479 3.29189C2.6298 2.33555 3.19471 1.78964 3.56085 1.48547Z' fill='%236D02A3'/%3E%3C/svg%3E");}
+    #dfButtonWrapper .df-button-icon:before{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.41675 2.33337C1.41675 1.64302 1.97639 1.08337 2.66675 1.08337H8.00008C8.60482 1.08337 9.10926 1.51281 9.22508 2.08337H13.6667C14.3571 2.08337 14.9167 2.64302 14.9167 3.33337V5.00004C14.9167 5.6904 14.3571 6.25004 13.6667 6.25004H12.575L11.4126 7.41252C11.1848 7.64033 10.8154 7.64033 10.5876 7.41252C10.3598 7.18471 10.3598 6.81537 10.5876 6.58756L11.9209 5.25423C12.0303 5.14483 12.1787 5.08337 12.3334 5.08337H13.6667C13.7128 5.08337 13.7501 5.04606 13.7501 5.00004V3.33337C13.7501 3.28735 13.7128 3.25004 13.6667 3.25004H9.25008V5.00004C9.25008 5.04606 9.28739 5.08337 9.33341 5.08337H10.0001C10.3222 5.08337 10.5834 5.34454 10.5834 5.66671C10.5834 5.98887 10.3222 6.25004 10.0001 6.25004H9.33341C8.72867 6.25004 8.22424 5.8206 8.10842 5.25004H6.66675C6.34458 5.25004 6.08341 4.98887 6.08341 4.66671C6.08341 4.34454 6.34458 4.08337 6.66675 4.08337H8.08341V2.33337C8.08341 2.28735 8.04611 2.25004 8.00008 2.25004H2.66675C2.62072 2.25004 2.58341 2.28735 2.58341 2.33337V4.00004C2.58341 4.04606 2.62072 4.08337 2.66675 4.08337H4.33341C4.48812 4.08337 4.6365 4.14483 4.74589 4.25423L6.74589 6.25423C6.9737 6.48203 6.9737 6.85138 6.74589 7.07919C6.51809 7.30699 6.14874 7.30699 5.92094 7.07919L4.09179 5.25004H2.66675C1.97639 5.25004 1.41675 4.6904 1.41675 4.00004V2.33337ZM5.00008 8.91671C4.35505 8.91671 3.82048 9.44768 3.82048 10.1172C3.82048 10.4386 3.94378 10.7284 4.14446 10.9435C4.36096 11.1756 4.6644 11.3176 5.00008 11.3176C5.33577 11.3176 5.6392 11.1756 5.85571 10.9435C6.05639 10.7284 6.17969 10.4386 6.17969 10.1172C6.17969 9.44768 5.64511 8.91671 5.00008 8.91671ZM2.65381 10.1172C2.65381 8.81632 3.69783 7.75004 5.00008 7.75004C6.30234 7.75004 7.34635 8.81632 7.34635 10.1172C7.34635 10.4313 7.28549 10.7317 7.17496 11.0065C7.41958 11.1116 7.70136 11.2688 7.92012 11.5003C7.94746 11.5293 7.97414 11.559 8.00012 11.5896C8.10873 11.4615 8.22663 11.3519 8.34849 11.2587C8.50436 11.1395 8.66389 11.0492 8.81502 10.9808C8.71094 10.7129 8.65381 10.4215 8.65381 10.1172C8.65381 8.81632 9.69783 7.75004 11.0001 7.75004C12.3023 7.75004 13.3464 8.81632 13.3464 10.1172C13.3464 10.4313 13.2855 10.7317 13.175 11.0065C13.4196 11.1116 13.7014 11.2688 13.9201 11.5003C14.4603 12.072 14.7416 12.9688 14.49 14.2863C14.4185 14.661 14.09 14.9167 13.7255 14.9167H8.27467C8.1788 14.9167 8.08615 14.8991 8.00023 14.8667C7.91376 14.8992 7.82087 14.9167 7.7255 14.9167H2.27467C1.90314 14.9167 1.57989 14.6523 1.50973 14.2842C1.36451 13.5222 1.39521 12.8965 1.56138 12.386C1.72947 11.8695 2.02502 11.506 2.34849 11.2587C2.50436 11.1395 2.66389 11.0492 2.81502 10.9808C2.71094 10.7129 2.65381 10.4215 2.65381 10.1172ZM3.52948 11.9617C3.38707 11.9985 3.21342 12.0659 3.05722 12.1854C2.90606 12.301 2.7599 12.4732 2.67077 12.747C2.59611 12.9764 2.5544 13.2996 2.60689 13.75H7.39339C7.40818 13.6238 7.41562 13.5073 7.4169 13.3998C7.41671 13.3775 7.41671 13.3555 7.4169 13.3335C7.41022 12.7738 7.23202 12.4708 7.0721 12.3016C6.97326 12.197 6.77994 12.0945 6.55067 12.0155C6.51431 12.003 6.47906 11.9917 6.44565 11.9817C6.04804 12.2957 5.546 12.4843 5.00008 12.4843C4.44265 12.4843 3.93095 12.2877 3.52948 11.9617ZM8.60689 13.75H13.3934C13.491 12.9163 13.2679 12.5088 13.0721 12.3016C12.9733 12.197 12.7799 12.0945 12.5507 12.0155C12.5143 12.003 12.4791 11.9917 12.4457 11.9817C12.048 12.2957 11.546 12.4843 11.0001 12.4843C10.4426 12.4843 9.93095 12.2877 9.52948 11.9617C9.38707 11.9985 9.21342 12.0659 9.05722 12.1854C8.90606 12.301 8.7599 12.4732 8.67077 12.747C8.59611 12.9764 8.5544 13.2996 8.60689 13.75ZM11.0001 8.91671C10.355 8.91671 9.82048 9.44768 9.82048 10.1172C9.82048 10.4386 9.94378 10.7284 10.1445 10.9435C10.361 11.1756 10.6644 11.3176 11.0001 11.3176C11.3358 11.3176 11.6392 11.1756 11.8557 10.9435C12.0564 10.7284 12.1797 10.4386 12.1797 10.1172C12.1797 9.44768 11.6451 8.91671 11.0001 8.91671Z' fill='white'/%3E%3C/svg%3E");margin-right:8px}
   `
   titlebarWrapperStyle.textContent = `
     .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important}
@@ -188,6 +196,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-message-user-font-weight: 400;
     --df-messenger-message-border-radius: 8px;
     --df-messenger-message-spacing:16px;
+    --df-messenger-message-stack-spacing:16px;
     --df-messenger-send-icon-color: #FFFFFF;
     --df-messenger-send-icon-color-disabled:#FFFFFF;
     --df-messenger-input-padding: 0px;
@@ -215,6 +224,8 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-button-font-color:#6D02A3;
     --df-messenger-button-text-align:center;
     --df-messenger-button-font-size:16px;
+    --df-messenger-button-padding:14px;
+    --df-messenger-button-icon-font-size:18px;
     --df-messenger-link-visited-font-color:#6D02A3;
     --df-messenger-link-hover-font-color:#4E0174;
     --df-messenger-link-font-color:#6D02A3;
@@ -355,10 +366,13 @@ window.addEventListener('resize', function checkHeight(){
     var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);
     botUtterance?.appendChild(htmlMessageStyleClone);
     botUtterance?.shadowRoot.appendChild(botInnerMessageStyleClone);
-    if (utterance.shadowRoot.querySelector('.message-stack.mid df-card')) {
-      var handoverButton = utterance.shadowRoot.querySelector('.message-stack.mid df-card').shadowRoot.querySelector('df-button')
-      var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
-      handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+    if (utterance.shadowRoot.querySelector('.message-stack df-card')) {
+      var allButtons = utterance.shadowRoot.querySelectorAll('.message-stack df-card');
+      allButtons.forEach(button => {
+        var handoverButton = button.shadowRoot.querySelector('df-button')
+        var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
+        handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+      });
     }
     //addFeedbackStyle(utterance);
     checkSources(botUtterance);
@@ -463,10 +477,13 @@ window.addEventListener('resize', function checkHeight(){
       var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);
       botUtterance.shadowRoot.appendChild(htmlMessageStyleClone);
       botUtterance?.shadowRoot.querySelector('df-html-message')?.shadowRoot.appendChild(botInnerMessageStyleClone);
-      if (botUtterance.shadowRoot.querySelector('.message-stack.mid df-card')) {
-        var handoverButton = botUtterance.shadowRoot?.querySelector('.message-stack.mid df-card')?.shadowRoot.querySelector('df-button');
-        var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
-        handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+      if (botUtterance.shadowRoot.querySelector('.message-stack df-card')) {
+        var allButtons = botUtterance.shadowRoot.querySelectorAll('.message-stack df-card');
+        allButtons.forEach(button => {
+          var handoverButton = button.shadowRoot.querySelector('df-button')
+          var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
+          handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
+        });
       }
     });
   }
@@ -506,7 +523,7 @@ window.addEventListener('resize', function checkHeight(){
     var utterance = messageList.querySelectorAll('.bot df-messenger-utterance');
     utterance.forEach(botUtterance => {
       var botMessage = botUtterance.shadowRoot?.querySelector('df-html-message').shadowRoot.querySelector('.bot-message .answer')
-      var answer = botMessage.innerText
+      var answer = botMessage?.innerText
       if(answer && answer?.includes('**')){
         answer = answer.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
         answer = answer.replace(/\*/g, "<br><br>• ");
