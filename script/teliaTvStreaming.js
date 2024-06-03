@@ -12,7 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
   var messengerBotUtterance = messageList.shadowRoot?.querySelector(".entry.bot:last-child df-messenger-utterance");
   var messengerFeedback = messengerBotUtterance?.shadowRoot?.querySelector('df-messenger-feedback');
   var citations = messengerBotUtterance?.shadowRoot?.querySelector("df-citations");
-  var agentHandoverOffered = false;
   document.querySelector('#myButton').addEventListener('click', openDFMessenger);
 
 
@@ -319,7 +318,7 @@ window.addEventListener('resize', function checkHeight(){
 
   var welcomeSubtitle = document.createElement('span');
   welcomeSubtitle.setAttribute('class', 'df-welcome-subtitle');
-  welcomeSubtitle.innerText = "Jag är en AI-chatt och kan ta fel ibland. Dela inte personliga uppgifter här.";
+  welcomeSubtitle.innerText = "Jag är en AI-chatt och kan göra fel ibland. Kontrollera att du har valt rätt produkt och pris innan du slutför köpet. Var noga med att inte dela personliga uppgifter här.";
 
   welcomeContainer.appendChild(welcomeIcon)
   welcomeTitleContainer.appendChild(welcomeTitle)
@@ -352,14 +351,7 @@ window.addEventListener('resize', function checkHeight(){
     setTimeout(() => checkIfWhisbi(event), 100);
     setTimeout(addBotUtteranceStyle, 100);
     addFeedbackStyle();
-    //setTimeout(addFeedbackStyle,100)
 });
-
-
-  window.addEventListener('df-feedback-request-sent', (event) => {
-    console.log('click-event: ', event)
-   // setTimeout(addFeedbackStyle,100);
-  });
 
   function addUserUtteranceStyle() {
     var userUtterances = messageList.querySelectorAll('.content .user');
@@ -396,7 +388,7 @@ window.addEventListener('resize', function checkHeight(){
     }
     addFeedbackStyle(utterance);
     checkSources(utterance);
-   // checkIfBulletlist(botUtterance)
+    checkIfBulletlist(botUtterance)
   }
   function checkSources(botUtterance) {
     var citation = botUtterance?.shadowRoot?.querySelector('df-citations')
@@ -420,23 +412,6 @@ window.addEventListener('resize', function checkHeight(){
 
     }
   }
-  function checkIfBulletlist(response) {
-    console.log(response)
-    var botMessage = response?.shadowRoot?.querySelector('.bot-message span span')
-    var messageText = botMessage?.innerText
-
-    if(messageText && messageText?.includes('**')){
-      console.log('innehåller **')
-      messageText = messageText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-      messageText = messageText.replace(/\*/g, "<br><br>• ");
-      botMessage.innerHTML = messageText;
-    }
-    if(messageText && messageText?.includes('*')){
-      console.log('innehåller *')
-      messageText = messageText.replace(/\*/g, "<br><br>• ");
-      botMessage.innerHTML = messageText;
-    }
-  }
 
   function checkIfWhisbi(response){
     if(response.detail.raw?.queryResult?.triggerEvent === "triggerWhisbi"){
@@ -456,7 +431,6 @@ window.addEventListener('resize', function checkHeight(){
     allUserUtterances();
     allBotUtterances();
     checkAllSources();
-   // checkAllBulletlists();
     styleAllFeedbackButtons();
   }
 
@@ -517,21 +491,5 @@ window.addEventListener('resize', function checkHeight(){
     });
 
 
-  }
-  function checkAllBulletlists(){
-    var utterance = messageList.querySelectorAll('.bot df-messenger-utterance');
-    utterance.forEach(botUtterance => {
-      var botMessage = botUtterance.shadowRoot?.querySelector('df-html-message')?.shadowRoot?.querySelector('.bot-message .answer')
-      var answer = botMessage?.innerText
-      if(answer && answer?.includes('**')){
-        answer = answer.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-        answer = answer.replace(/\*/g, "<br><br>• ");
-        botMessage.innerHTML = answer;
-      }
-      if(answer && answer?.includes('*')){
-        answer = answer.replace(/\*/g, "<br><br>• ");
-        botMessage.innerHTML = answer;
-      }
-    });
   }
 });
