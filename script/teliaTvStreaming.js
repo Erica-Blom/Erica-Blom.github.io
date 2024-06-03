@@ -385,7 +385,7 @@ window.addEventListener('resize', function checkHeight(){
     }
     addFeedbackStyle(utterance);
     checkSources(utterance);
-    checkIfBulletlist(botUtterance)
+    //checkIfBulletlist(botUtterance)
   }
   function checkSources(botUtterance) {
     var citation = botUtterance?.shadowRoot?.querySelector('df-citations')
@@ -445,7 +445,7 @@ window.addEventListener('resize', function checkHeight(){
     allUserUtterances();
     allBotUtterances();
     checkAllSources();
-    checkAllBulletlists();
+    //checkAllBulletlists();
     styleAllFeedbackButtons();
   }
 
