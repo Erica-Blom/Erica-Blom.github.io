@@ -225,7 +225,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-send-icon-color-disabled:#FFFFFF;
     --df-messenger-input-padding: 0px;
     --df-messenger-input-font-size: 16px;
-    --df-messenger-input-box-padding: 12px;
+    --df-messenger-input-box-padding: 15px;
     --df-messenger-input-background:#fff;
     --df-messenger-input-border-top:none;
     --df-messenger-input-border-bottom:1px solid rgba(0, 0, 0, 0.44);
@@ -504,4 +504,3 @@ window.addEventListener('resize', function checkHeight(){
 
   }
 });
-
