@@ -213,6 +213,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-message-bot-background: #F5F5FA;
     --df-messenger-message-bot-font-color: rgba(0, 0, 0, 0.8);
     --df-messenger-message-bot-font-weight: 400;
+    --df-messenger-message-bot-writing-spacing:0px;
     --df-messenger-message-font-size: 16px;
     --df-messenger-message-user-background: #FAF0FF;
     --df-messenger-message-user-font-color: rgba(0, 0, 0, 0.8);
@@ -404,9 +405,11 @@ window.addEventListener('resize', function checkHeight(){
     var source1 = citation?.shadowRoot?.querySelector('.citation:first-of-type')
     var source2 = citation?.shadowRoot?.querySelector('.citation:last-of-type')
     console.log("sources", source1, source2)
-    console.log("titles", source1?.querySelector('.title')?.innerText, source2?.querySelector('.title')?.innerText)
+    console.log("title1", source1?.querySelector('.title')?.innerText)
+    console.log("title2", source2?.querySelector('.title')?.innerText)
     if (source1?.querySelector('.title')?.innerText === source2?.querySelector('.title')?.innerText) {
-      source2?.remove();
+     console.log("titles are the same!", source2)
+      // source2?.remove();
     }
     var styleCitationsClone = styleCitations.cloneNode(true);
     citation?.shadowRoot?.appendChild(styleCitationsClone)
@@ -425,8 +428,8 @@ window.addEventListener('resize', function checkHeight(){
   function checkIfWhisbi(response){
     if(response.detail.raw?.queryResult?.triggerEvent === "triggerWhisbi"){
       var utterance = messageList.querySelector('.bot:last-child df-messenger-utterance');
-      var handoverButton = button.shadowRoot.querySelector('df-button');
       var button = utterance.shadowRoot.querySelector('.message-stack df-card');
+      var handoverButton = button.shadowRoot.querySelector('df-button');
       var handoverButtonStyleClone = handoverButtonStyle.cloneNode(true);
       handoverButton.shadowRoot.appendChild(handoverButtonStyleClone)
       const openWhisbiEvent = new CustomEvent("ace-open-whisbi", {});
