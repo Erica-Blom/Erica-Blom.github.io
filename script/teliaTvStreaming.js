@@ -53,20 +53,6 @@ window.addEventListener('DOMContentLoaded', () => {
         transform: translateX(0);
       }
     }
-  
-    @keyframes slideOutToRight {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
-    @media (prefers-reduced-motion:no-preference) {
-      .chat-wrapper.hidden {
-    animation: slideOutToRight .25s ease forwards
-      }
-    }
   `
   
   styleUserInput.textContent = `
@@ -113,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
   `
   botInnerMessageStyle.textContent = `
     .bot-message .source-header{font-weight:500 !important; font-size:14px !important; line-height:14px !important;margin-top:16px;margin-bottom:8px}
-    .bot-message p{margin-top:0px;margin-bottom:12px}
+    .bot-message p{margin-top:12px;margin-bottom:0px}
     .bot-message a{color:#6D02A3 !important}
     .bot-message a:hover{color:#4E0174 !important}
     .bot-message a:active{color:#29003E !important}
