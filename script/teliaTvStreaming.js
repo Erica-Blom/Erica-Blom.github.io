@@ -42,6 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
     .bubble{position:absolute !important; bottom:105px;right:900px;display:none !important}
     .container{position:fixed !important; bottom:0px;right:0px }
     .chat-wrapper.expanded{bottom:0px !important; animation: .25s ease forwards slideInFromRight; border-top-right-radius:0px !important; }
+    .chat-wrapper{transform-origin:right !important}
     .chat-wrapper.hidden{animation: 1s ease-out 0s 1 slideOutToRight;}
     
     
