@@ -41,24 +41,31 @@ window.addEventListener('DOMContentLoaded', () => {
   chatbubbleStyle.textContent = `
     .bubble{position:absolute !important; bottom:105px;right:900px;display:none !important}
     .container{position:fixed !important; bottom:0px;right:0px }
-    .chat-wrapper.expanded{bottom:0px !important; border-top-right-radius:0px !important;}
-
+    .chat-wrapper.expanded{bottom:0px !important; animation: .25s ease forwards slideInFromRight; border-top-right-radius:0px !important; }
+    .chat-wrapper.hidden{animation: 1s ease-out 0s 1 slideOutToRight;}
     
     
-/* Both states */
-.chat-wrapper, .chat-wrapper.expanded {
-  transition: transform .25s ease;
-}
-
-/* Initial state */
-.chat-wrapper {
-  transform: translateX(100%);
-}
-
-/* Expanded state */
-.chat-wrapper.expanded {
-  transform: translateX(0);
-}
+    @keyframes slideInFromRight {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  
+    @keyframes slideOutToRight {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+    @media (prefers-reduced-motion:no-preference) {
+      .chat-wrapper.hidden {
+    animation: slideOutToRight .25s ease forwards
+      }
 
   `
   
