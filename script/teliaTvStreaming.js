@@ -253,7 +253,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-input-background:#fff;
     --df-messenger-input-border-top:none;
     --df-messenger-input-border-bottom:1px solid rgba(0, 0, 0, 0.44);
-    --df-messenger-input-box-focus-border:2px solid #B12DF4;
+    --df-messenger-input-box-focus-border:none;
     --df-messenger-message-feedback-icon-font-color: #6D02A3;
     --df-messenger-message-feedback-icon-font-color-active:#29003E;
     --df-messenger-citations-font-color: #6D02A3;
