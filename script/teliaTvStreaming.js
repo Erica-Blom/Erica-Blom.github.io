@@ -227,7 +227,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-default-box-shadow:none;
     --df-messenger-chat-bubble-background: #FFFFFF;
     --df-messenger-chat-bubble-icon-size:40px;
-    --df-messenger-chat-window-height: ${screenHeight}px;
+    --df-messenger-chat-window-height: 100dvh;
     --df-messenger-chat-background: #FFFFFF;
     --df-messenger-chat-scroll-button-display:block;
     --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
