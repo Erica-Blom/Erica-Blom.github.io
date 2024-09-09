@@ -338,9 +338,9 @@ window.addEventListener('DOMContentLoaded', () => {
   /*Checks if windowsize is changed to adjust the css*/
   window.addEventListener('resize', function checkHeight(){
   var height = window.visualViewport ? window.visualViewport.height : window.innerHeight
-    if(height > 600){
+    
       updateStyles()
-    }
+    console.log("resize height" + height)
   });
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
   chat.appendChild(titlebar)
