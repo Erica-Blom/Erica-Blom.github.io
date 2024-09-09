@@ -335,6 +335,14 @@ console.log("Nytt skript")
   };
   updateStyles();
 
+window.addEventListener('scroll', function() {
+    console.log('The element is being scrolled');
+    var height = window.visualViewport ? window.visualViewport.height : window.innerHeight
+    
+      updateStyles()
+    console.log("resize height" + height)
+});
+
   /*Checks if windowsize is changed to adjust the css*/
   window.addEventListener('resize', function checkHeight(){
   var height = window.visualViewport ? window.visualViewport.height : window.innerHeight
