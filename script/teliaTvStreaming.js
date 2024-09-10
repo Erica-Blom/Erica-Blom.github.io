@@ -390,7 +390,7 @@ window.addEventListener('scroll', function() {
   var messageList = messageArea.shadowRoot.querySelector('.message-list-wrapper');
   var messages = messageList.querySelector('#message-list .content');
   var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
-  userInput.shadowRoot.appendChild(styleUserInput);
+  //userInput.shadowRoot.appendChild(styleUserInput);
   
   /*Checks where to add the welcome message if a conversation is started and the user reloads the page*/
   if (messages.firstChild) {
@@ -526,7 +526,7 @@ window.addEventListener('scroll', function() {
       var htmlMessageStyleClone = htmlMessageStyle.cloneNode(true);
       var botInnerMessageStyleClone = botInnerMessageStyle.cloneNode(true);
       //botUtterance.shadowRoot.appendChild(htmlMessageStyleClone);
-      botUtterance?.shadowRoot.querySelector('df-html-message')?.shadowRoot.appendChild(botInnerMessageStyleClone);
+      //botUtterance?.shadowRoot.querySelector('df-html-message')?.shadowRoot.appendChild(botInnerMessageStyleClone);
       if (botUtterance.shadowRoot.querySelector('.message-stack df-card')) {
         var allButtons = botUtterance.shadowRoot.querySelectorAll('.message-stack df-card');
         allButtons.forEach(button => {
