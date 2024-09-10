@@ -208,7 +208,6 @@ console.log("Nytt skript")
   var commonStyles = `
   df-messenger {
     z-index: 999;
-    position: fixed;
     --df-messenger-titlebar-background: #FFFFFF;
     --df-messenger-titlebar-title-font-weight:700;
     --df-messenger-titlebar-title-font-size:20px;
@@ -216,9 +215,6 @@ console.log("Nytt skript")
     --df-messenger-chat-padding:20px;
     --df-messenger-font-family:Telia Sans;
     --df-messenger-default-font-family:Telia Sans;
-    bottom:0px;
-    top:0px;
-    right:0px
   }
   df-messenger-chat-bubble {
     --df-messenger-chat-bubble-background:transparent;
