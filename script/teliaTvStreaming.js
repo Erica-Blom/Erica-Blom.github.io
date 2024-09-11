@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-
+console.log("no scroll")
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
