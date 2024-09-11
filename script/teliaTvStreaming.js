@@ -44,8 +44,8 @@ console.log("no scroll")
   `
   
   chatbubbleStyle.textContent = `
-    .bubble{position:absolute !important; bottom:105px;right:900px;display:none !important}
-    .container{position:fixed !important; bottom:0px;right:0px }
+    .bubble{pposition:absolute !important; bottom:105px;right:900px;display:none !important}
+    .container{pposition:fixed !important; bottom:0px;right:0px }
     .chat-wrapper.expanded{bottom:0px !important; animation: .25s ease forwards slideInFromRight; border-top-right-radius:0px !important; transition:none !important }
     .chat-wrapper.hidden{animation: 1s ease-out 0s 1 slideOutToRight;}
     
@@ -188,14 +188,13 @@ console.log("no scroll")
     .focus-outline:focus-visible::before{border:none !important}
   `
   titlebarWrapperStyle.textContent = `
-    .titlebar-wrapper{border-top-right-radius:0px !important; position:sticky!important}
+    .titlebar-wrapper{border-top-right-radius:0px !important;}
   `
   titlebar.textContent = `
-    df-messenger-titlebar{position:sticky !important; top:0}
     .close-action:hover{height:48px;width:48px}
   `
   messageWrapperStyle.textContent = `
-    df-messenger-message-list{display:block !important}
+    df-messenger-message-list{display!:block !important}
   `
   chat.shadowRoot.appendChild(messageWrapperStyle);
   var styleElement = null;
@@ -213,7 +212,7 @@ console.log("no scroll")
   var commonStyles = `
   df-messenger {
     z-index: 999;
-    position: fixed;
+    pposition: fixed;
     --df-messenger-titlebar-background: #FFFFFF;
     --df-messenger-titlebar-title-font-weight:700;
     --df-messenger-titlebar-title-font-size:20px;
@@ -234,7 +233,7 @@ console.log("no scroll")
     --df-messenger-chat-bubble-icon-size:40px;
     --df-messenger-chat-window-height: ${screenHeight}px;
     --df-messenger-chat-background: #FFFFFF;
-    --df-messenger-chat-scroll-button-display:block;
+    --df-messenger-chat-scroll-button-display!:block;
     --df-messenger-chat-scroll-button-background-color:rgba(43, 43, 43, 1);
     --df-messenger-chat-scroll-button-padding:7.5px;
     --df-messenger-chat-scroll-button-text-display:none;
@@ -353,11 +352,11 @@ console.log("no scroll")
   if (screenWidth <= 600) {
     titlebarStyle.textContent = `
       df-messenger-titlebar{
-        position:sticky!important;
+        pposition:sticky!important;
         top:0;
         left:0;
         width:100%;
-        z-index:2
+        z-index:20000
       }
     `
     chat.appendChild(titlebarStyle);
