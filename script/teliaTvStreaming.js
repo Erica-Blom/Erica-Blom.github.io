@@ -1,9 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-<style> .no-scroll {
-    overflow: hidden;
-}
 
-                        </style>
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
@@ -35,7 +31,12 @@ window.addEventListener('DOMContentLoaded', () => {
   var titlebar = document.createElement('style');
   var messageWrapperStyle = document.createElement('style');
   var styleCitations = document.createElement('style');
+  var bodyStyle = document.createElement('style');
   
+  bodyStyle.textContent=`
+  .no-scroll {overflow: hidden;}
+  `
+
   styleCitations.textContent = `
     .citations-list .citation span.title{white-space:break-spaces !important}
     .citations-list .citation .icon{display:none}
@@ -221,6 +222,7 @@ window.addEventListener('DOMContentLoaded', () => {
     --df-messenger-font-family:Telia Sans;
     --df-messenger-default-font-family:Telia Sans;
     bottom:0px;
+    top:0px;
     right:0px
   }
   df-messenger-chat-bubble {
@@ -345,8 +347,6 @@ window.addEventListener('DOMContentLoaded', () => {
       updateStyles()
     }
   });
-
-  
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
   chat.appendChild(titlebar)
 
@@ -392,16 +392,17 @@ window.addEventListener('DOMContentLoaded', () => {
   var messages = messageList.querySelector('#message-list .content');
   var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
   userInput.shadowRoot.appendChild(styleUserInput);
+  console.log("user input",userInput.shadowRoot.querySelector('.input-box'))
+
   userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () => {
-    document.body.classList.add('no-scroll');
-      console.log("in focus")
+    document.body.appendChild(bodyStyle);
+    console.log("focus")
 });
 
 userInput.shadowRoot.querySelector('.input-box').addEventListener('blur', () => {
-    document.body.classList.remove('no-scroll');
+    document.body.removeChild(bodyStyle)
 });
 
-  
   /*Checks where to add the welcome message if a conversation is started and the user reloads the page*/
   if (messages.firstChild) {
     messages.insertBefore(welcomeContainer, messages.firstChild);
