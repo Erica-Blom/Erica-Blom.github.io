@@ -1,5 +1,9 @@
 window.addEventListener('DOMContentLoaded', () => {
+<style> .no-scroll {
+    overflow: hidden;
+}
 
+                        </style>
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
@@ -341,6 +345,8 @@ window.addEventListener('DOMContentLoaded', () => {
       updateStyles()
     }
   });
+
+  
   chat.querySelector('df-messenger-titlebar').shadowRoot.appendChild(titlebarWrapperStyle)
   chat.appendChild(titlebar)
 
@@ -386,6 +392,14 @@ window.addEventListener('DOMContentLoaded', () => {
   var messages = messageList.querySelector('#message-list .content');
   var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
   userInput.shadowRoot.appendChild(styleUserInput);
+  userInput.addEventListener('focus', () => {
+    document.body.classList.add('no-scroll');
+});
+
+userInput.addEventListener('blur', () => {
+    document.body.classList.remove('no-scroll');
+});
+
   
   /*Checks where to add the welcome message if a conversation is started and the user reloads the page*/
   if (messages.firstChild) {
