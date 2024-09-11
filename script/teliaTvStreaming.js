@@ -395,7 +395,7 @@ console.log("no scroll")
   console.log("user input",userInput.shadowRoot.querySelector('.input-box'))
 
   userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () => {
-    document.body.appendChild(bodyStyle);
+    document.body.setAttribute("style", "overflow:hidden")
     console.log("focus")
 });
 
