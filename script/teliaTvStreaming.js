@@ -392,11 +392,12 @@ window.addEventListener('DOMContentLoaded', () => {
   var messages = messageList.querySelector('#message-list .content');
   var userInput = chat.shadowRoot.querySelector('df-messenger-user-input');
   userInput.shadowRoot.appendChild(styleUserInput);
-  userInput.addEventListener('focus', () => {
+  userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () => {
     document.body.classList.add('no-scroll');
+      console.log("in focus")
 });
 
-userInput.addEventListener('blur', () => {
+userInput.shadowRoot.querySelector('.input-box').addEventListener('blur', () => {
     document.body.classList.remove('no-scroll');
 });
 
