@@ -398,7 +398,7 @@ window.addEventListener('DOMContentLoaded', () => {
       if(viewportH > visualViewport.height){
         window.scrollTo(0, 219);
         console.log("Scroll changed", viewportH, visualViewport.height)
-      
+      }
     })
 });
 
