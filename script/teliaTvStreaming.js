@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-console.log("med timeout2")
+console.log("med timeout3")
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
@@ -390,21 +390,27 @@ console.log("med timeout2")
   userInput.shadowRoot.appendChild(styleUserInput);
   console.log("user input",userInput.shadowRoot.querySelector('.input-box'))
 
-  userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () => {
-    let visualViewport = window.visualViewport;
+userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () => {
+  let visualViewport = window.visualViewport;
+  setTimeout(() => {
     let viewportH = visualViewport.height;
     console.log("focus vV", viewportH);
+
     visualViewport.addEventListener("resize", (event) => {
-      console.log("Scroll changed", viewportH, visualViewport.height)
-      if(viewportH < (visualViewport.height)){
-        console.log("Scroll changed", viewportH, visualViewport.height, visualViewport.height-1)
+      console.log("Scroll changed", viewportH, visualViewport.height);
+      if (viewportH < visualViewport.height) {
+        console.log("Scroll changed", viewportH, visualViewport.height, visualViewport.height - 1);
         var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
-        setTimeout(window.scrollTo(0, rect.y),2000);
-        console.log("Scroll changed", viewportH, visualViewport.height)
-        console.log(rect.y)
+        setTimeout(() => {
+          window.scrollTo(0, rect.y);
+        }, 2000);
+        console.log("Scroll changed", viewportH, visualViewport.height);
+        console.log(rect.y);
       }
-    })
+    });
+  }, 2000); // Adjust the timeout duration as needed
 });
+
 
 
   /*Checks where to add the welcome message if a conversation is started and the user reloads the page*/
