@@ -400,9 +400,10 @@ userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () =>
       console.log("Scroll changed", viewportH, visualViewport.height);
       if (viewportH > visualViewport.height) {
         console.log("Scroll changed1", viewportH, visualViewport.height, visualViewport.height - 1);
+
+        setTimeout(() => {
         var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
         console.log("rect.y", rect.y);
-        setTimeout(() => {
           window.scrollTo(0, rect.y);
           console.log("Scroll changed", viewportH, visualViewport.height);
           console.log("rect.y", rect.y);
