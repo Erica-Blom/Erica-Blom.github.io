@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-console.log("med timeout10")
+console.log("med timeout11")
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
@@ -398,31 +398,22 @@ userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () =>
     let viewportH = visualViewport.height;
     console.log("focus vV", viewportH);
 
-    const resizeHandler = (event) => {
-      if (!isProgrammaticScroll) {
-        console.log("Scroll changed", viewportH, visualViewport.height);
-        if (viewportH > visualViewport.height) {
-          console.log("Scroll changed1", viewportH, visualViewport.height, visualViewport.height - 1);
-
-          setTimeout(() => {
-            var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
-            console.log("rect.y", rect.y);
-            isProgrammaticScroll = true;
-            window.scrollTo(0, rect.y);
-            console.log("Scroll changed", viewportH, visualViewport.height);
-            console.log("rect.y", rect.y);
-            isProgrammaticScroll = false;
-          }, 20000);
-
-          // Remove the event listener after it has been triggered
-          visualViewport.removeEventListener("resize", resizeHandler);
-        }
+    visualViewport.addEventListener("resize", (event) => {
+      console.log("Scroll changed", viewportH, visualViewport.height);
+      if (viewportH < visualViewport.height) {
+        console.log("Scroll changed1", viewportH, visualViewport.height, visualViewport.height - 1);
+        setTimeout(() => {
+          var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
+          console.log(rect.y);
+          window.scrollTo(0, rect.y);
+        }, 2000);
+        console.log("Scroll changed2", viewportH, visualViewport.height);
+        console.log(rect.y);
       }
-    };
-
-    visualViewport.addEventListener("resize", resizeHandler);
+    });
   }, 2000); // Adjust the timeout duration as needed
 });
+
 
 
 
