@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-console.log("med timeout6")
+console.log("med timeout7")
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
@@ -396,7 +396,7 @@ userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () =>
     let viewportH = visualViewport.height;
     console.log("focus vV", viewportH);
 
-    visualViewport.addEventListener("resize", (event) => {
+    visualViewport.addEventListener("touchend", (event) => {
       console.log("Scroll changed", viewportH, visualViewport.height);
       if (viewportH > visualViewport.height) {
         console.log("Scroll changed1", viewportH, visualViewport.height, visualViewport.height - 1);
