@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-console.log("med timeout4")
+console.log("med timeout5")
   var screenWidth = window.innerWidth;
   var screenHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   var trigger = document.querySelector("df-messenger-chat-bubble");
@@ -403,7 +403,7 @@ userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () =>
         var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
         setTimeout(() => {
           window.scrollTo(0, rect.y);
-        }, 2000);
+        }, 20000);
         console.log("Scroll changed", viewportH, visualViewport.height);
         console.log(rect.y);
       }
