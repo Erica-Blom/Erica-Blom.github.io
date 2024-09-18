@@ -396,8 +396,9 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log("focus vV", viewportH);
     visualViewport.addEventListener("resize", (event) => {
       if(viewportH > (visualViewport.height-1)){
+        console.log("Scroll changed", viewportH, visualViewport.height, visualViewport.height-1)
         var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
-        window.scrollTo(0, rect.y);
+        setTimeout(window.scrollTo(0, rect.y),2000);
         console.log("Scroll changed", viewportH, visualViewport.height)
         console.log(rect.y)
       }
