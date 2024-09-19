@@ -406,14 +406,15 @@ console.log("med timeout11")
                 visualViewport.removeEventListener("resize", resizeHandler);
 
                 setTimeout(() => {
-                    var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
-                    console.log("rect.y", rect.y);
-                    window.scrollTo(0, rect.y);
+                    //var rect = document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').shadowRoot.querySelector('.chat-wrapper df-messenger-user-input').shadowRoot.querySelector('.input-container').getBoundingClientRect();
+                    var rect =  document.querySelector('df-messenger df-messenger-chat-bubble').shadowRoot.querySelector('.container .chat-wrapper df-messenger-chat').getBoundingClientRect();
+                    console.log("rect.y", rect.bottom);
+                    window.scrollTo(0, rect.bottom);
                     console.log("Scroll changed", viewportH, visualViewport.height);
-                    console.log("rect.y", rect.y);
+                    console.log("rect.y", rect.bottom);
 
                     // Reattach the resize event listener
-                    visualViewport.addEventListener("resize", resizeHandler);
+                   // visualViewport.addEventListener("resize", resizeHandler);
                 }, 400);
             }
         };
