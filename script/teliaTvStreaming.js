@@ -390,7 +390,6 @@ console.log("med timeout11")
   userInput.shadowRoot.appendChild(styleUserInput);
   console.log("user input",userInput.shadowRoot.querySelector('.input-box'))
 
-let isProgrammaticScroll = false;
 
   userInput.shadowRoot.querySelector('.input-box').addEventListener('focus', () => {
     let visualViewport = window.visualViewport;
