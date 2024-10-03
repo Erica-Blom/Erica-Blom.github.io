@@ -2,25 +2,26 @@
 <html>
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <!--<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/staging/df-messenger.js"></script>-->
   <title>Telia MVP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
+  
 </head>
 
-<body style="background-color:purple">
- <script src="./script/teliaTvStreaming.js"></script>
-
-
-
-
- <df-messenger
+<body style="background-color:pink;">
+  <script src="./script/teliaTvStreaming.js"></script>
+  <button id="myButton">Öppna chatten</button>
+  <button id="clearChat">Rensa chatten</button>
+  <!--<df-messenger location="global" project-id="convhub-delivery-dev-cx" agent-id="94cc8700-d7b0-4ae2-8beb-16f971ef84c3"
+  language-code="sv" allow-feedback="none">-->
+  <!--test agent-id="85d9c35a-03a2-4be7-b830-79050512a0d8"-->
+  <!--produktion agent-id="6094ac83-e353-4e6e-917c-afb5c92062bb"-->
+  <df-messenger
     location="europe-west1"
     project-id="telia-se-digitalchannels"
     agent-id="a2976d74-e7c2-49c6-bf8f-f558cc601651"  
@@ -31,8 +32,22 @@
     >
   </df-messenger-chat-bubble>
 </df-messenger>
-
-
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+        var resetButton = document.getElementById("clearChat")
 
+        resetButton.addEventListener("click", function (){
+          Object.keys(sessionStorage).filter(function (key) {
+                    if (key.indexOf("df-messenger") === 0) return true;
+                    else return false;
+                })
+                .forEach(function (key) {
+                    sessionStorage.removeItem(key);
+                })  
+          location.reload();
+          
+        })
+})
+</script>
 </html>
